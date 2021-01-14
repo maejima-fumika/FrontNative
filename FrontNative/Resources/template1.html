@@ -1,0 +1,351 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="sheet-title text-center">インフルエンザ予防接種 予診票</div>
+      <div style="margin-top: -24px; text-align: end">任意接種用</div>
+      <table class="same-font-size">
+        <tr>
+          <th class="question" style="width: 40mm; height: 10mm">
+            (予防接種を受ける人の)氏名
+          </th>
+          <td class="answer" style="min-width: 80mm" id="answer_name"></td>
+          <th class="question" style="width: 30mm">診察前体温</th>
+          <td class="answer thick-border" style="width: 40mm">
+            <br />
+            <p style="text-align: right; margin: 0">_________度________分</p>
+          </td>
+        </tr>
+        <tr style="height: 10mm">
+          <th class="question">住所</th>
+          <td class="answer" id="answer_address"></td>
+          <th class="question">生年月日</th>
+          <td class="answer" id="answer_birth">
+            19<br />20_____年_____月_____日
+          </td>
+        </tr>
+      </table>
+      <table class="margin5 same-font-size">
+        <tr>
+          <th rowspan="2" style="width: 90mm">質問事項</th>
+          <th colspan="2">回答</th>
+          <th rowspan="2" style="width: 20mm">補助質問</th>
+          <th rowspan="2">回答</th>
+          <th rowspan="2" style="width: 35mm">医師記入欄</th>
+        </tr>
+        <tr>
+          <td>はい</td>
+          <td>いいえ</td>
+        </tr>
+        <!-- 質問　開始 -->
+        <tr>
+          <th class="cell question">
+            1.今日受けられる予防接種について、上記の説明文を読んで理解しましたか。
+          </th>
+          <td class="answer_nomal" id="answer_1_true"></td>
+          <td class="answer_abnomal" id="answer_1_false"></td>
+          <td class="question"></td>
+          <td class="answer_memo" id="answer_1_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            2.今シーズン、他にインフルエンザの予防接種を受けましたか？受けた場合は回数をお答えください。
+          </th>
+          <td class="answer_abnomal" id="answer_2_true"></td>
+          <td class="answer_nomal" id="answer_2_false"></td>
+          <td class="question">回数</td>
+          <td class="answer_memo" id="answer_2_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            3.現在何かの病気で医師にかかっていますか？
+          </th>
+          <td class="answer_abnomal" id="answer_3_true"></td>
+          <td class="answer_nomal" id="answer_3_false"></td>
+          <td class="question">病名</td>
+          <td class="answer_memo" id="answer_3_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            4.治療(投薬など)を受けていますか？その病気は主治医には今日の予防接種を受けて良いと言われましたか？
+          </th>
+          <td class="answer_abnomal" id="answer_4_true"></td>
+          <td class="answer_nomal" id="answer_4_false"></td>
+          <td class="question">治療内容</td>
+          <td class="answer_memo" id="answer_4_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            5.最近1ヶ月以内に熱が出たり、何かの病気にかかったりしましたか？
+          </th>
+          <td class="answer_abnomal" id="answer_5_true"></td>
+          <td class="answer_nomal" id="answer_5_false"></td>
+          <td class="question">病名</td>
+          <td class="answer_memo" id="answer_5_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            6.最近1ヶ月以内に近親者や周囲に、麻疹、風疹、水痘、おたふくかぜなどにかかった方がいますか？
+          </th>
+          <td class="answer_abnomal" id="answer_6_true"></td>
+          <td class="answer_nomal" id="answer_6_false"></td>
+          <td class="question">病名</td>
+          <td class="answer_memo" id="answer_6_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            7.最近1ヶ月以内に予防接種を受けましたか？
+          </th>
+          <td class="answer_abnomal" id="answer_7_true"></td>
+          <td class="answer_nomal" id="answer_7_false"></td>
+          <td class="question">予防接種名</td>
+          <td class="answer_memo" id="answer_7_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            8.今までに予防接種を受けて具合の悪くなったことはありますか？
+          </th>
+          <td class="answer_abnomal" id="answer_8_true"></td>
+          <td class="answer_nomal" id="answer_8_false"></td>
+          <td class="question">予防接種名</td>
+          <td class="answer_memo" id="answer_8_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            9.次のいずれかの病気にかかったことがありますか？先天性異常、心臓・腎臓・肝臓・血液・脳神経・免疫不全症、悪性腫瘍
+          </th>
+          <td class="answer_abnomal" id="answer_9_true"></td>
+          <td class="answer_nomal" id="answer_9_false"></td>
+          <td class="question">病名</td>
+          <td class="answer_memo" id="answer_9_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            10.今までにひきつけ（けいれん）を起こしたことがありますか？
+          </th>
+          <td class="answer_abnomal" id="answer_10_true"></td>
+          <td class="answer_nomal" id="answer_10_false"></td>
+          <td class="question">いつ頃何回か・最後に起こした日付</td>
+          <td class="answer_memo" id="answer_10_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            11.今までに間質性肺炎・気管支喘息などの呼吸器系疾患と診断されたことはありますか？
+          </th>
+          <td class="answer_abnomal" id="answer_11_true"></td>
+          <td class="answer_nomal" id="answer_11_false"></td>
+          <td class="question">いつ頃/治療中・治療中でない</td>
+          <td class="answer_memo" id="answer_11_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            12.薬や食品(鶏卵、鶏肉)で皮膚に発疹やじんましんが出たり、体の具合が悪くなったことはありますか？
+          </th>
+          <td class="answer_abnomal" id="answer_12_true"></td>
+          <td class="answer_nomal" id="answer_12_false"></td>
+          <td class="question">薬・食品名</td>
+          <td class="answer_memo" id="answer_12_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            13.近親者に予防接種を受けて具合が悪くなった方はいますか？
+          </th>
+          <td class="answer_abnomal" id="answer_13_true"></td>
+          <td class="answer_nomal" id="answer_13_false"></td>
+          <td class="question">予防接種名</td>
+          <td class="answer_memo" id="answer_13_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            14.近親者に先天性免疫不全と診断されている方はいますか？
+          </th>
+          <td class="answer_abnomal" id="answer_14_true"></td>
+          <td class="answer_nomal" id="answer_14_false"></td>
+          <td class="question"></td>
+          <td class="answer_memo" id="answer_14_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            15.(女性のみ)現在、妊娠していますか？(男性はいいえとお答えください)
+          </th>
+          <td class="answer_abnomal" id="answer_15_true"></td>
+          <td class="answer_nomal" id="answer_15_false"></td>
+          <td class="question"></td>
+          <td class="answer_memo" id="answer_15_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+        <tr>
+          <th class="cell question">
+            16.その他健康状態のことで医師に伝えておきたいことはありますか？
+          </th>
+          <td class="answer_abnomal" id="answer_16_true"></td>
+          <td class="answer_nomal" id="answer_16_false"></td>
+          <td class="question">伝えておきたいこと</td>
+          <td class="answer_memo" id="answer_16_memo"></td>
+          <td class="thick-border"></td>
+        </tr>
+
+        <!-- 質問　終了 -->
+      </table>
+      <table class="margin5 same-font-size">
+        <tr>
+          <td style="vertical-align: top">
+            医師の診察、説明を受け、予防接種の効果や副反応などについて理解した上で、接種を希望しますか?<br />
+            <p style="text-align: center; margin: 0">
+              <span class="answer"
+                >(接種を希望します / 接種を希望しません)</span
+              >
+            </p>
+            <span class="serif">本人の署名(もしくは保護者の署名)</span
+            ><br /><br />
+            <p class="signature">______________________________________</p>
+          </td>
+          <td style="width: 105mm" class="thick-border">
+            医師の記入欄:以上の問診及び診察の結果、今日の予防接種は<br />
+            <p style="text-align: center; margin: 0">
+              <span class="answer">( 可能 /見合わせる )</span>
+            </p>
+            <!-- 本人(もしくは保護者)に対して、予防接種の効果、副反応及び医薬品医療機器総合機構法に基づく救済について説明した。<br /> -->
+            <span class="serif">医師の署名または記名押印</span><br />
+            <br />
+            <p class="signature">______________________________________</p>
+          </td>
+        </tr>
+      </table>
+      <table class="margin5 same-font-size">
+        <tr>
+          <th>使用ワクチン名・メーカー名</th>
+          <th>接種量</th>
+          <th>実施場所・医師名・接種日時</th>
+        </tr>
+        <tr>
+          <td style="width: 50mm">
+            使用したワクチンのシールを貼ってください。<br /><br /><br /><br />
+          </td>
+          <td>
+            (皮下接種) <br />□0.25 mL (6ヶ月以上3歳未満)<br />
+            □0.5 mL (3歳以上)<br />
+          </td>
+          <td style="width: 100mm">
+            実施場所<br /><br />医師名<br /><br />
+            <div>
+              接種日時 20________年________月________日________時________分
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
+<style scoped>
+  @media print {
+    .container {
+      padding: 0 !important;
+    }
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .sheet {
+    margin: 0mm;
+    padding: 10mm;
+    position: relative;
+    width: 210mm;
+    height: 294mm;
+  }
+  .sheet-title {
+    /* padding-top: 10mm; */
+    font-size: 9mm;
+  }
+  .cell {
+    padding: 4px;
+  }
+  .question {
+    font-weight: normal;
+    height: 12mm;
+  }
+  .answer {
+    font-weight: bold;
+    font-size: 3.2mm;
+    width: 25mm;
+  }
+  .answer_nomal {
+    width: 12mm;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4mm;
+    color: gray;
+  }
+  .answer_abnomal {
+    width: 12mm;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4mm;
+    color: red;
+  }
+  .answer_memo {
+    font-weight: bold;
+    font-size: 3.2mm;
+    width: 25mm;
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+  .alert {
+    font-weight: bold;
+    font-family: "serif";
+    text-align: right;
+    font-style: italic;
+    text-decoration: underline wavy 2px black;
+    margin: 0px;
+  }
+  .signature {
+    text-align: right;
+    margin-bottom: 0;
+  }
+  .serif {
+    font-weight: bold;
+    font-size: 3.2mm;
+    font-family: "serif";
+  }
+  .margin5 {
+    margin-top: 5px;
+  }
+  .thick-border {
+    border: solid 3px black;
+  }
+  .same-font-size {
+    font-size: 2.8mm;
+  }
+  table {
+    border: solid 1px black;
+    border-collapse: collapse;
+  }
+  td {
+    border: solid 1px black;
+    padding: 2px;
+  }
+  th {
+    border: solid 1px black;
+    text-align: left;
+    padding: 2px;
+  }
+</style>
