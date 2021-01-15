@@ -14,7 +14,7 @@ enum DrawingTool: Int {
         case .pen:
             return 5
         case .highlighter:
-            return 10
+            return 5
         default:
             return 0
         }
@@ -30,13 +30,19 @@ enum DrawingTool: Int {
     }
 }
 
+class SelectedTool:ObservableObject  {
+    @Published var tool:DrawingTool = .pencil
+    @Published var color:UIColor = .black
+}
+
 class PDFDrawer {
     weak var pdfView: PDFView!
     private var path: UIBezierPath?
     private var currentAnnotation : DrawingAnnotation?
     private var currentPage: PDFPage?
-    var color = UIColor.black // default color is red
-    var drawingTool = DrawingTool.pencil
+//    var color = UIColor.black // default color is red
+//    var drawingTool = DrawingTool.pencil
+    var selectedTool = SelectedTool()
 }
 
 extension PDFDrawer: DrawingGestureRecognizerDelegate {
@@ -52,7 +58,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         guard let page = currentPage else { return }
         let convertedPoint = pdfView.convert(location, to: page)
         
-        if drawingTool == .eraser {
+        if selectedTool.tool == .eraser {
             removeAnnotationAtPoint(point: convertedPoint, page: page)
             return
         }
@@ -67,7 +73,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         let convertedPoint = pdfView.convert(location, to: page)
         
         // Erasing
-        if drawingTool == .eraser {
+        if selectedTool.tool == .eraser {
             removeAnnotationAtPoint(point: convertedPoint, page: page)
             return
         }
@@ -86,10 +92,10 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
     
     private func createAnnotation(path: UIBezierPath, page: PDFPage) -> DrawingAnnotation {
         let border = PDFBorder()
-        border.lineWidth = drawingTool.width
+        border.lineWidth = selectedTool.tool.width
         
         let annotation = DrawingAnnotation(bounds: page.bounds(for: pdfView.displayBox), forType: .ink, withProperties: nil)
-        annotation.color = color.withAlphaComponent(drawingTool.alpha)
+        annotation.color = selectedTool.color.withAlphaComponent(selectedTool.tool.alpha)
         annotation.border = border
         return annotation
     }
@@ -107,7 +113,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
     
     private func createFinalAnnotation(path: UIBezierPath, page: PDFPage) -> PDFAnnotation {
         let border = PDFBorder()
-        border.lineWidth = drawingTool.width
+        border.lineWidth = selectedTool.tool.width
         
         let bounds = CGRect(x: path.bounds.origin.x - 5,
                             y: path.bounds.origin.y - 5,
@@ -118,7 +124,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         signingPathCentered.moveCenter(to: bounds.center)
         
         let annotation = PDFAnnotation(bounds: bounds, forType: .ink, withProperties: nil)
-        annotation.color = color.withAlphaComponent(drawingTool.alpha)
+        annotation.color = selectedTool.color.withAlphaComponent(selectedTool.tool.alpha)
         annotation.border = border
         annotation.add(signingPathCentered)
         page.addAnnotation(annotation)

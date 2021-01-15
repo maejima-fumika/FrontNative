@@ -8,42 +8,64 @@
 import SwiftUI
 
 struct DrawTools: View {
+    @EnvironmentObject var selectedTool: SelectedTool
     var body: some View {
         VStack {
             Spacer()
-            HStack(alignment:.bottom){
-                
-//                Button(action: {}) {
-//                    Eraser()
-//                }
-//                .frame(width: 60, height: 55)
-//                Button(action: {}) {
-//                    Image(systemName: "pencil.tip")
-//                        .scaleEffect(3)
-//                        .foregroundColor(.blue)
-//                }
-//                .frame(width: 45, height: 55)
-//                //.padding(.bottom)
-//                Button(action: {}) {
-//                    Image(systemName: "pencil.tip")
-//                        .scaleEffect(3)
-//                        .foregroundColor(.red)
-//                }
-//                .frame(width: 45, height: 55)
-//                .padding(.bottom, 10.0)
-//                Button(action: {}) {
-//                    Image(systemName: "pencil.tip")
-//                        .scaleEffect(3)
-//                        .foregroundColor(.black)
-//                }
-//                .frame(width: 45, height: 55)
+            ZStack{
+                Capsule()
+                    .fill(Color.white)
+                    .frame(width: 300, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                HStack{
+                    Button(action: {
+                        selectedTool.tool = .eraser
+                    }) {
+                        Image(systemName: "circle.dashed")
+                            .scaleEffect(1.5)
+                            .foregroundColor(Color.black)
+                            .frame(width: 60, height: 70)
+                            .padding(.bottom, 7)
+                    }
+                    Button(action: {
+                        selectedTool.tool = .pencil
+                        selectedTool.color = .black
+                    }) {
+                        Image(systemName: "scribble.variable")
+                            .scaleEffect(1.5)
+                            .foregroundColor(Color.black)
+                            .frame(width: 60, height: 70)
+                            .padding(.bottom, 7)
+                    }
+                    Button(action: {
+                        selectedTool.tool = .pencil
+                        selectedTool.color = .red
+                    }) {
+                        Image(systemName: "scribble.variable")
+                            .scaleEffect(1.5)
+                            .foregroundColor(Color.red)
+                            .frame(width: 60, height: 70)
+                            .padding(.bottom, 7)
+                    }
+                    Button(action: {
+                        selectedTool.tool = .highlighter
+                        selectedTool.color = .yellow
+                    }) {
+                        Image(systemName: "highlighter")
+                            .scaleEffect(1.5)
+                            .foregroundColor(Color.yellow)
+                            .frame(width: 60, height: 70)
+                            .padding(.bottom, 7)
+                    }
+                }
             }
+            
         }
     }
 }
 
-struct DrawTools_Previews: PreviewProvider {
-    static var previews: some View {
-        DrawTools()
-    }
-}
+//struct DrawTools_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DrawTools()
+//    }
+//}

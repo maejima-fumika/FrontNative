@@ -24,7 +24,7 @@ struct ReadQRcode: View {
            case .failure(let error):
                print("Scanning failed \(error)")
             self.codeText = "failed"
-            self.showingView = "pdf"
+            self.showingView = "text"
            }
         }
 }
