@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DrawTools: View {
-    @EnvironmentObject var selectedTool: SelectedTool
+    var selectedTool:SelectedTool
     var body: some View {
         VStack {
             Spacer()

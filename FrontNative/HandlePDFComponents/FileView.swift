@@ -7,9 +7,9 @@ struct FileView: UIViewRepresentable {
     var script: String
     var webView:WKWebView
     let pdfDrawer:PDFDrawer
-    @EnvironmentObject var selectedTool: SelectedTool
+    var selectedTool: SelectedTool
     
-    init(fileURLWithPath:String, script:String) {
+    init(fileURLWithPath:String, script:String, selectedTool:SelectedTool) {
         self.fileURLWithPath = fileURLWithPath
         self.script = script
         print(self.script)
@@ -21,6 +21,7 @@ struct FileView: UIViewRepresentable {
         webConfig.userContentController = userController
         
         self.webView = WKWebView(frame: .zero,configuration: webConfig)
+        self.selectedTool = selectedTool
         self.pdfDrawer = PDFDrawer()
     }
     

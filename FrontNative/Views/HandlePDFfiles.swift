@@ -12,6 +12,7 @@ struct HandlePDFfiles: View {
     @State private var showingView = "qrcode"
     @State private var drawingTool = DrawingTool.pencil
     @State private var drawingColor = UIColor.black
+    private var selectedTool = SelectedTool()
     
     var body: some View {
         let fileURLWithPath =  Bundle.main.path(forResource: "template1", ofType: "html")!
@@ -19,11 +20,10 @@ struct HandlePDFfiles: View {
             if showingView == "pdf"{
                 let script = Javascript1(answerString:codeText
                 )
-                Group {
-                    FileView(fileURLWithPath:fileURLWithPath,script: script.mkScript())
-                    DrawTools()
-                }
-                .environmentObject(SelectedTool())
+                
+                FileView(fileURLWithPath:fileURLWithPath,script: script.mkScript(),selectedTool:selectedTool)
+                DrawTools(selectedTool:selectedTool)
+                
             }
             else if showingView == "qrcode"{
                 ReadQRcode(codeText:$codeText, showingView:$showingView)
@@ -34,7 +34,7 @@ struct HandlePDFfiles: View {
             NextBackBtn()
         }
         .navigationBarTitle(Text("ファイル名"))
-
+        
         .navigationBarTitleDisplayMode(.inline)
     }
 }
