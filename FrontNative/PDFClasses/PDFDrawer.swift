@@ -5,7 +5,7 @@ enum DrawingTool: Int {
     case eraser = 0
     case pencil = 1
     case pen = 2
-    case highlighter = 3
+    case highlighter = 4
     
     var width: CGFloat {
         switch self {
@@ -30,19 +30,13 @@ enum DrawingTool: Int {
     }
 }
 
-class SelectedTool:ObservableObject  {
-    @Published var tool:DrawingTool = .pencil
-    @Published var color:UIColor = .black
-}
-
 class PDFDrawer {
     weak var pdfView: PDFView!
     private var path: UIBezierPath?
     private var currentAnnotation : DrawingAnnotation?
     private var currentPage: PDFPage?
-//    var color = UIColor.black // default color is red
-//    var drawingTool = DrawingTool.pencil
     var selectedTool = SelectedTool()
+    var saveURL:URL?
 }
 
 extension PDFDrawer: DrawingGestureRecognizerDelegate {
@@ -52,6 +46,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         let convertedPoint = pdfView.convert(location, to: currentPage!)
         path = UIBezierPath()
         path?.move(to: convertedPoint)
+        print(selectedTool.color)
     }
     
     func gestureRecognizerMoved(_ location: CGPoint) {
@@ -87,6 +82,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         // Final annotation
         page.removeAnnotation(currentAnnotation!)
         let finalAnnoattion = createFinalAnnotation(path: path!, page: page)
+        pdfView.document?.write(to: saveURL!)
         currentAnnotation = nil
     }
     
@@ -128,7 +124,7 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         annotation.border = border
         annotation.add(signingPathCentered)
         page.addAnnotation(annotation)
-                
+        
         return annotation
     }
     
@@ -141,5 +137,24 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
     private func forceRedraw(annotation: PDFAnnotation, onPage: PDFPage) {
         onPage.removeAnnotation(annotation)
         onPage.addAnnotation(annotation)
+    }
+    
+    func mkSaveURL(savePath:Path){
+        let folderName = savePath.folderName ?? "error"
+        let fileName = savePath.fileName ?? "currentError"
+        let path = folderName + "/" + fileName + ".pdf"
+        //Directoryを作成する。存在する場合は作られない
+        guard let directoryUrl = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(folderName) else { return }
+        do {
+            try FileManager.default.createDirectory(at: directoryUrl, withIntermediateDirectories: true, attributes: nil)
+            print("Directory created at:",directoryUrl)
+        } catch let error as NSError {
+            NSLog("Unable to create directory \(error.debugDescription)")
+        }
+        //ファイル保存用のURLを作成する。ちなみに、Pathの作成はjavascriptの中の.mkFilePathで行っている。
+        guard let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(path) else { return }
+        print(url)
+        saveURL = url
+        
     }
 }

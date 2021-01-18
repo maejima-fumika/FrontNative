@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AllFiles: View {
+    @EnvironmentObject var path:Path
     var body: some View {
         //NavigationView {
             ZStack {
@@ -30,7 +31,10 @@ struct AllFiles: View {
                 }
                 FloatingBtn()
             }
-            .navigationBarTitle(Text("フォルダー名"))
+            .onAppear{
+                path.fileName = ""
+            }
+            .navigationBarTitle(Text(path.folderName ?? ""))
 
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

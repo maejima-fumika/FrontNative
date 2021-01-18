@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DrawTools: View {
-    var selectedTool:SelectedTool
+    @EnvironmentObject var selectedTool:SelectedTool
     var body: some View {
         VStack {
             Spacer()
@@ -38,6 +38,7 @@ struct DrawTools: View {
                             .padding(.bottom, 7)
                     }
                     Button(action: {
+                        print(selectedTool.color)
                         selectedTool.tool = .pencil
                         selectedTool.color = .red
                     }) {

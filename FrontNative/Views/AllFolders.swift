@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AllFolders: View {
+    @EnvironmentObject var path:Path
     var body: some View {
         NavigationView {
             ZStack {
@@ -26,11 +27,19 @@ struct AllFolders: View {
                             FolderListComponent()
                         }
                         .padding([.top, .leading, .trailing], 15.0)
+                        .onAppear{
+                            path.folderName = ""
+                            path.fileName = ""
+                        }
+                        .onDisappear{
+                            path.folderName = "フォルダー名だよ"
+                        }
                     }
                     Spacer()
                 }
                 .navigationBarHidden(true)
                 .navigationTitle("健診一覧")
+                
                 FloatingBtn()
             }
             //.navigationTitle("健診一覧")

@@ -26,7 +26,7 @@ class Javascript1: NSObject {
         let d:String
     }
     
-    struct decodedAnswer {
+    struct DecodedAnswer {
         var eid:String
         var uid:String
         var name:String
@@ -44,7 +44,7 @@ class Javascript1: NSObject {
         var memo:String
     }
 
-    func decodeAnswer() -> decodedAnswer?{
+    func decodeAnswer() -> DecodedAnswer?{
         let jsonData = answerString.data(using: .utf8)!
         let decoder = JSONDecoder()
         guard let objs = try? decoder.decode(Answer.self, from: jsonData) else {
@@ -61,7 +61,7 @@ class Javascript1: NSObject {
             let dt=detail(id:i+1,radio: radio, memo:memo)
             details.append(dt)
         }
-        return decodedAnswer(
+        return DecodedAnswer(
             eid:objs.eid,
             uid: objs.uid,
             name:objs.n.removingPercentEncoding ?? "NaN",
@@ -75,11 +75,9 @@ class Javascript1: NSObject {
     }
     
     func mkScript() -> String {
-        print("bizz")
         guard let da = decodeAnswer() else{
             return "'no javascript'"
         }
-        print(da)
         var javascript = """
             document.getElementById("answer_name").innerHTML = "\(da.name)";
             document.getElementById("answer_address").innerHTML = "\(da.address)";
@@ -95,6 +93,16 @@ class Javascript1: NSObject {
             
         }
         return javascript
+    }
+    
+    func mkFilePath(path:Path){
+        guard let da = decodeAnswer() else{
+            return
+        }
+        path.fileName = da.uid + "_" + da.name
+        //path.fileName = da.uid
+        path.folderName = da.eid
+        return
     }
 
     

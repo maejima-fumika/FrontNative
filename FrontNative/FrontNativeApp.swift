@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct FrontNativeApp: App {
+    @StateObject private var path = Path()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(path)
         }
     }
 }

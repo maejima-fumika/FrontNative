@@ -7,9 +7,10 @@ struct FileView: UIViewRepresentable {
     var script: String
     var webView:WKWebView
     let pdfDrawer:PDFDrawer
-    var selectedTool: SelectedTool
+    @EnvironmentObject var selectedTool: SelectedTool
+    @EnvironmentObject var path:Path
     
-    init(fileURLWithPath:String, script:String, selectedTool:SelectedTool) {
+    init(fileURLWithPath:String, script:String) {
         self.fileURLWithPath = fileURLWithPath
         self.script = script
         print(self.script)
@@ -21,7 +22,7 @@ struct FileView: UIViewRepresentable {
         webConfig.userContentController = userController
         
         self.webView = WKWebView(frame: .zero,configuration: webConfig)
-        self.selectedTool = selectedTool
+        //self.selectedTool = selectedTool
         self.pdfDrawer = PDFDrawer()
     }
     
@@ -51,6 +52,7 @@ struct FileView: UIViewRepresentable {
         pdfView.addGestureRecognizer(pdfDrawingGestureRecognizer)
         pdfDrawer.pdfView = pdfView
         pdfDrawer.selectedTool = selectedTool
+        print(selectedTool.color)
     }
     
     
@@ -63,7 +65,10 @@ struct FileView: UIViewRepresentable {
         
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            parent.pdfDrawer.mkSaveURL(savePath: parent.path)
             parent.pdfDrawer.pdfView.document = PDFDocument(data: createPDFpage())
+            parent.pdfDrawer.pdfView.document?.write(to: parent.pdfDrawer.saveURL!)
+            
         }
         
         func createPDFpage() -> Data {
