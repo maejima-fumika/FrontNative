@@ -8,38 +8,34 @@
 import SwiftUI
 
 struct HandlePDFfiles: View {
-    @State private var codeText = "no text"
     @State private var showingView = "qrcode"
-    //private var selectedTool = SelectedTool()
+    @State private var pdfFileURL:URL = URL(fileURLWithPath: "error")
     @StateObject private var selectedTool = SelectedTool()
+    @StateObject private var script = Javascript1() 
     @EnvironmentObject var path:Path
     
     var body: some View {
         let fileURLWithPath =  Bundle.main.path(forResource: "template1", ofType: "html")!
         ZStack {
-            if showingView == "pdf"{
-                let script = Javascript1(answerString:codeText
-                )
+            if showingView == "qrcode"{
+                QRcodeView(showingView:$showingView)
+            }
+            else if showingView == "waiting"{
+                WaitingView(templatePath:fileURLWithPath, script:script, showingView:$showingView,fileURL:$pdfFileURL)
+            }
+            else if showingView == "pdf"{
                 Group {
-                    FileView(fileURLWithPath:fileURLWithPath,script: script.mkScript())
+                    PDFDrawerView(fileURL:$pdfFileURL)
                     DrawTools()
                 }
                 .environmentObject(selectedTool)
-                .onAppear{
-                    script.mkFilePath(path:path)
-                }
-            }
-            else if showingView == "qrcode"{
-                ReadQRcode(codeText:$codeText, showingView:$showingView)
-                    .onAppear{
-                        path.fileName = "QRコード読み取り"
-                    }
             }
             else {
-                Text(codeText)
+                
             }
             NextBackBtn()
         }
+        .environmentObject(script)
         .navigationBarTitle(Text(path.fileName ?? ""))
         .navigationBarTitleDisplayMode(.inline)
     }

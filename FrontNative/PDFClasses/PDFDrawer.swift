@@ -139,22 +139,4 @@ extension PDFDrawer: DrawingGestureRecognizerDelegate {
         onPage.addAnnotation(annotation)
     }
     
-    func mkSaveURL(savePath:Path){
-        let folderName = savePath.folderName ?? "error"
-        let fileName = savePath.fileName ?? "currentError"
-        let path = folderName + "/" + fileName + ".pdf"
-        //Directoryを作成する。存在する場合は作られない
-        guard let directoryUrl = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(folderName) else { return }
-        do {
-            try FileManager.default.createDirectory(at: directoryUrl, withIntermediateDirectories: true, attributes: nil)
-            print("Directory created at:",directoryUrl)
-        } catch let error as NSError {
-            NSLog("Unable to create directory \(error.debugDescription)")
-        }
-        //ファイル保存用のURLを作成する。ちなみに、Pathの作成はjavascriptの中の.mkFilePathで行っている。
-        guard let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(path) else { return }
-        print(url)
-        saveURL = url
-        
-    }
 }

@@ -7,14 +7,12 @@
 
 import Foundation
 
-class Javascript1: NSObject {
-    let answerString:String
+class Javascript1: ObservableObject {
+    var answerString:String?
+    @Published var saveURL:URL?
+    private var decodedAnswer:DecodedAnswer?
     
-    init(answerString:String) {
-        self.answerString = answerString
-    }
-    
-    struct Answer:Decodable {
+    private struct Answer:Decodable {
         let eid:String
         let uid:String
         let n:String
@@ -26,7 +24,13 @@ class Javascript1: NSObject {
         let d:String
     }
     
-    struct DecodedAnswer {
+    func setupAnswer(answerString:String){
+        self.answerString = answerString
+        decodeAnswer()
+        mkSaveURL()
+    }
+    
+    private struct DecodedAnswer {
         var eid:String
         var uid:String
         var name:String
@@ -38,20 +42,20 @@ class Javascript1: NSObject {
         var details:[detail]
     }
     
-    struct detail {
+    private struct detail {
         var id:Int
         var radio:Bool
         var memo:String
     }
 
-    func decodeAnswer() -> DecodedAnswer?{
-        let jsonData = answerString.data(using: .utf8)!
+    private func decodeAnswer(){
+        guard let jsonData = answerString?.data(using: .utf8)! else {
+            return
+        }
         let decoder = JSONDecoder()
         guard let objs = try? decoder.decode(Answer.self, from: jsonData) else {
-            return nil
+            return
         }
-        print("hello")
-        print(objs)
         var details = [detail]()
         //var arr = objs.d.removingPercentEncoding
         let arr = objs.d.split(separator: "?")
@@ -61,7 +65,7 @@ class Javascript1: NSObject {
             let dt=detail(id:i+1,radio: radio, memo:memo)
             details.append(dt)
         }
-        return DecodedAnswer(
+        decodedAnswer = DecodedAnswer(
             eid:objs.eid,
             uid: objs.uid,
             name:objs.n.removingPercentEncoding ?? "NaN",
@@ -74,9 +78,9 @@ class Javascript1: NSObject {
         )
     }
     
-    func mkScript() -> String {
-        guard let da = decodeAnswer() else{
-            return "'no javascript'"
+    func mkScript() -> String? {
+        guard let da = decodedAnswer else {
+            return nil
         }
         var javascript = """
             document.getElementById("answer_name").innerHTML = "\(da.name)";
@@ -95,16 +99,34 @@ class Javascript1: NSObject {
         return javascript
     }
     
+    private func mkSaveURL(){
+            guard let da = decodedAnswer else{
+                return
+            }
+            let folderName = da.eid
+            let fileName = da.uid + "_" + da.name
+            let path = folderName + "/" + fileName + ".pdf"
+            //Directoryを作成する。存在する場合は作られない
+            guard let directoryUrl = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(folderName) else { return }
+            do {
+                try FileManager.default.createDirectory(at: directoryUrl, withIntermediateDirectories: true, attributes: nil)
+                print("Directory created at:",directoryUrl)
+            } catch let error as NSError {
+                NSLog("Unable to create directory \(error.debugDescription)")
+            }
+            //ファイル保存用のURLを作成する。ちなみに、Pathの作成はjavascriptの中の.mkFilePathで行っている。
+            guard let url = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(path) else { return }
+            saveURL = url
+            return
+        }
+    
     func mkFilePath(path:Path){
-        guard let da = decodeAnswer() else{
+        guard let da = decodedAnswer else{
             return
         }
         path.fileName = da.uid + "_" + da.name
-        //path.fileName = da.uid
         path.folderName = da.eid
         return
     }
-
-    
 }
 

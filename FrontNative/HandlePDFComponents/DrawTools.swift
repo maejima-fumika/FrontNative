@@ -41,6 +41,7 @@ struct DrawTools: View {
                         print(selectedTool.color)
                         selectedTool.tool = .pencil
                         selectedTool.color = .red
+                        print(selectedTool.color)
                     }) {
                         Image(systemName: "scribble.variable")
                             .scaleEffect(1.5)

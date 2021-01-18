@@ -10,5 +10,8 @@ import Foundation
 class Path:ObservableObject  {
     @Published var folderName:String?
     @Published var fileName:String?
+    @Published var fileIndex:Int = 0
+    @Published var URLs = [URL]()
 }
+
 

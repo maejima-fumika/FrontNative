@@ -1,16 +1,16 @@
 //
-//  ReadQRcode.swift
+//  QRcodeView.swift
 //  FrontNative
 //
-//  Created by 前島文香 on 2021/01/14.
+//  Created by 前島文香 on 2021/01/18.
 //
 
 import SwiftUI
 import CodeScanner
 
-struct ReadQRcode: View {
-    @Binding var codeText:String
+struct QRcodeView: View {
     @Binding var showingView:String
+    @EnvironmentObject var script: Javascript1
     var body: some View {
         CodeScannerView(codeTypes: [.qr], simulatedData: "Some simulated data", completion: self.handleScan)
     }
@@ -19,19 +19,17 @@ struct ReadQRcode: View {
            switch result {
            case .success(let data):
                print("Success with \(data)")
-            self.codeText = data
-            self.showingView = "pdf"
+            self.script.setupAnswer(answerString:data)
+            self.showingView = "waiting"
            case .failure(let error):
                print("Scanning failed \(error)")
-            self.codeText = "failed"
             self.showingView = "text"
            }
         }
 }
 
-//struct ReadQRcode_Previews: PreviewProvider {
+//struct QRcodeView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        let codeText = "no text"
-//        ReadQRcode(codeText: codeText)
+//        QRcodeView()
 //    }
 //}

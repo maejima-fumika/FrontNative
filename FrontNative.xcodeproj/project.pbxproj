@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		982F197625B01E3200383DA6 /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982F197525B01E3200383DA6 /* TestFunc.swift */; };
 		982F197A25B0454800383DA6 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 982F197925B0454800383DA6 /* CodeScanner */; };
-		982F197E25B045B400383DA6 /* ReadQRcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982F197D25B045B400383DA6 /* ReadQRcode.swift */; };
 		9849B56E25AC182F00302749 /* template1.html in Resources */ = {isa = PBXBuildFile; fileRef = 9849B56D25AC182E00302749 /* template1.html */; };
 		9849B57225AC259A00302749 /* javascript1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B57125AC259A00302749 /* javascript1.swift */; };
 		9887996B25B16FF200278F64 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887996A25B16FF200278F64 /* Path.swift */; };
+		9887996E25B55D5500278F64 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887996D25B55D5500278F64 /* WaitingView.swift */; };
+		9887997125B55D9200278F64 /* PDFDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887997025B55D9200278F64 /* PDFDrawerView.swift */; };
+		9887997725B5B93D00278F64 /* QRcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887997625B5B93D00278F64 /* QRcodeView.swift */; };
 		98C6665A259A1ADD0056D2A8 /* FrontNativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C66659259A1ADD0056D2A8 /* FrontNativeApp.swift */; };
 		98C6665C259A1ADD0056D2A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C6665B259A1ADD0056D2A8 /* ContentView.swift */; };
 		98C6665E259A1AE50056D2A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C6665D259A1AE50056D2A8 /* Assets.xcassets */; };
@@ -41,10 +43,12 @@
 
 /* Begin PBXFileReference section */
 		982F197525B01E3200383DA6 /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
-		982F197D25B045B400383DA6 /* ReadQRcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadQRcode.swift; sourceTree = "<group>"; };
 		9849B56D25AC182E00302749 /* template1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template1.html; sourceTree = "<group>"; };
 		9849B57125AC259A00302749 /* javascript1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = javascript1.swift; sourceTree = "<group>"; };
 		9887996A25B16FF200278F64 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		9887996D25B55D5500278F64 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		9887997025B55D9200278F64 /* PDFDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDrawerView.swift; sourceTree = "<group>"; };
+		9887997625B5B93D00278F64 /* QRcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRcodeView.swift; sourceTree = "<group>"; };
 		98C66656259A1ADD0056D2A8 /* FrontNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98C66659259A1ADD0056D2A8 /* FrontNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontNativeApp.swift; sourceTree = "<group>"; };
 		98C6665B259A1ADD0056D2A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,14 +89,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		982F197C25B0457400383DA6 /* QRcodeComponents */ = {
-			isa = PBXGroup;
-			children = (
-				982F197D25B045B400383DA6 /* ReadQRcode.swift */,
-			);
-			path = QRcodeComponents;
-			sourceTree = "<group>";
-		};
 		98C6664D259A1ADD0056D2A8 = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +108,6 @@
 		98C66658259A1ADD0056D2A8 /* FrontNative */ = {
 			isa = PBXGroup;
 			children = (
-				982F197C25B0457400383DA6 /* QRcodeComponents */,
 				98C666A125A313DA0056D2A8 /* PDFClasses */,
 				98C6669A259B519C0056D2A8 /* Resources */,
 				98C6668E259B04BD0056D2A8 /* HandlePDFComponents */,
@@ -190,6 +185,9 @@
 				98C66693259B23F60056D2A8 /* DrawTools.swift */,
 				98C66697259B2CC60056D2A8 /* FileView.swift */,
 				98C6669E259B5ACE0056D2A8 /* NextBackBtn.swift */,
+				9887996D25B55D5500278F64 /* WaitingView.swift */,
+				9887997025B55D9200278F64 /* PDFDrawerView.swift */,
+				9887997625B5B93D00278F64 /* QRcodeView.swift */,
 			);
 			path = HandlePDFComponents;
 			sourceTree = "<group>";
@@ -297,15 +295,17 @@
 			files = (
 				98C6669F259B5ACE0056D2A8 /* NextBackBtn.swift in Sources */,
 				98C6666B259A1BD40056D2A8 /* folders.swift in Sources */,
+				9887996E25B55D5500278F64 /* WaitingView.swift in Sources */,
 				98C66698259B2CC60056D2A8 /* FileView.swift in Sources */,
 				98C66694259B23F60056D2A8 /* DrawTools.swift in Sources */,
 				98C66683259AF1F30056D2A8 /* FileListComponent.swift in Sources */,
-				982F197E25B045B400383DA6 /* ReadQRcode.swift in Sources */,
 				98C666BA25A3376D0056D2A8 /* UIBezierPath+.swift in Sources */,
 				98C6668C259B04980056D2A8 /* HandlePDFfiles.swift in Sources */,
 				98C6667F259AF1C20056D2A8 /* AllFiles.swift in Sources */,
 				982F197625B01E3200383DA6 /* TestFunc.swift in Sources */,
 				98C66675259A23140056D2A8 /* Header.swift in Sources */,
+				9887997725B5B93D00278F64 /* QRcodeView.swift in Sources */,
+				9887997125B55D9200278F64 /* PDFDrawerView.swift in Sources */,
 				98C666AA25A315170056D2A8 /* DrawingGestureRecognizer.swift in Sources */,
 				98C66691259B1D5A0056D2A8 /* Eraser.swift in Sources */,
 				98C666B725A337250056D2A8 /* PDFPage+Selection.swift in Sources */,
