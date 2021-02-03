@@ -30,6 +30,8 @@ enum DrawingTool: Int {
     }
 }
 
+//PDFDrawerViewで代用したので使っていない
+
 class PDFDrawer {
     weak var pdfView: PDFView!
     private var path: UIBezierPath?

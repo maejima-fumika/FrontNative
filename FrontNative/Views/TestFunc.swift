@@ -1,15 +1,21 @@
 import SwiftUI
+import PDFKit
 
 
 struct testFunc: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIActivityIndicatorView {
+    let url = Bundle.main.url(forResource: "Document", withExtension: "pdf")!
+    func makeUIView(context: Context) -> PDFView {
         // 戻り値をWKWebViewとし、返却する
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.startAnimating()
-        return indicator
+        
+        let pdfView = PDFView()
+        pdfView.backgroundColor = UIColor.gray
+        pdfView.autoScales = true
+        pdfView.displayMode = .singlePage
+        pdfView.document = PDFDocument(url: url)
+        return pdfView
     }
 
-    func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
+    func updateUIView(_ uiView: PDFView, context: Context) {
         
     }
 }

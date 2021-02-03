@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct FloatingBtn: View {
+    @Binding var isOn:Bool
     var body: some View {
         VStack {
             Spacer()
             HStack {
                 Spacer()
                 Button(action: {
-                    
+                    isOn = true
                 }, label: {
                     Text("+")
                         .font(.system(.largeTitle))
@@ -34,8 +35,8 @@ struct FloatingBtn: View {
     }
 }
 
-struct FloatingBtn_Previews: PreviewProvider {
-    static var previews: some View {
-        FloatingBtn()
-    }
-}
+//struct FloatingBtn_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FloatingBtn()
+//    }
+//}

@@ -8,7 +8,20 @@
 import SwiftUI
 
 struct AllFiles: View {
+    let folder:ItemAttribute?
+    let selectedFileName:String
+    @State private var files = [ItemAttribute]()
+    @State private var showSheet = false
+    @State var selectedPushedItem:Int?
     @EnvironmentObject var path:Path
+    
+    init(folder:ItemAttribute?,selectedFileName:String="nothing") {
+        self.folder = folder
+        self.selectedFileName = selectedFileName
+    }
+    
+
+    
     var body: some View {
         //NavigationView {
             ZStack {
@@ -21,40 +34,45 @@ struct AllFiles: View {
                     .padding(.top)
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 300)
-                    List(0..<8){_ in
-                        NavigationLink(destination: HandlePDFfiles()){
-                            FileListComponent()
+                    List{
+                        ForEach(files, id:\.self.id){ file in
+                            NavigationLink(destination: HandlePDFfiles(showView: "pdf",files: files, index: file.id),tag:file.id,selection:$selectedPushedItem){
+                                FileListComponent(file:file) 
+                            }
+                            .padding([.top, .leading, .trailing], 15.0)
                         }
-                        .padding([.top, .leading, .trailing], 15.0)
+                        
                     }
                     Spacer()
                 }
-                FloatingBtn()
+                .sheet(isPresented: $showSheet){
+                    AddNewFile(showSheet: $showSheet,folders:$files, selectedPushedItem:$selectedPushedItem)
+                }
             }
             .onAppear{
-                path.fileName = ""
+                let path = folder?.name
+                //print(path)
+                let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(path ?? "")
+                let ItemList = ListOfDirItems()
+                ItemList.setItems(dirURL: dirURL!)
+                files = ItemList.sortByName()
+                if selectedFileName != "nothing"{
+                    selectedPushedItem = files.filter({$0.name == (selectedFileName+".pdf")}).first?.id 
+                }
             }
-            .navigationBarTitle(Text(path.folderName ?? ""))
+            .navigationBarTitle(Text(folder?.name ?? "ファイル一覧"))
 
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("選択") {}
                 }
-                /// ボトムバー
-                //                ToolbarItem(placement: .bottomBar) {
-                //                    Button(action: {}) {
-                //                        Label("送信", systemImage: "paperplane")
-                //                    }
-                //                }
             }
-//        }
-//        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
-struct AllFiles_Previews: PreviewProvider {
-    static var previews: some View {
-        AllFiles()
-    }
-}
+//struct AllFiles_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AllFiles()
+//    }
+//}

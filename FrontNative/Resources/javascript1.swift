@@ -128,5 +128,19 @@ class Javascript1: ObservableObject {
         path.folderName = da.eid
         return
     }
+    
+    func mkFileName() -> String? {
+        guard let da = decodedAnswer else{
+            return nil
+        }
+        return da.uid + "_" + da.name
+    }
+    
+    func folderName() -> String? {//addNewFolderでつかってる
+        guard let da = decodedAnswer else{
+            return nil
+        }
+        return da.eid
+    }
 }
 

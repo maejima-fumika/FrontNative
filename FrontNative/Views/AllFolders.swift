@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct AllFolders: View {
-    @EnvironmentObject var path:Path
+    @State private var folders = [ItemAttribute]()
+    @State private var showSheet = false
+    @State var selectedPushedItem:Int?
+    @State var selectedFileName = "nothing"
     var body: some View {
         NavigationView {
             ZStack {
@@ -22,30 +25,32 @@ struct AllFolders: View {
                     .padding(.top)
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 300)
-                    List(0..<8){_ in
-                        NavigationLink(destination: AllFiles()){
-                            FolderListComponent()
-                        }
-                        .padding([.top, .leading, .trailing], 15.0)
-                        .onAppear{
-                            path.folderName = ""
-                            path.fileName = ""
-                        }
-                        .onDisappear{
-                            path.folderName = "フォルダー名だよ"
+                    List{
+                        ForEach(folders, id:\.self){ folder in
+                            NavigationLink(destination: AllFiles(folder:folder,selectedFileName:selectedFileName),tag:folder.id,selection:$selectedPushedItem){
+                                FolderListComponent(folder:folder)
+                            }
+                            .padding([.top, .leading, .trailing], 15.0)
                         }
                     }
                     Spacer()
                 }
+                .sheet(isPresented: $showSheet){
+                    AddNewFolder(showSheet: $showSheet,folders:$folders, selectedPushedItem:$selectedPushedItem,selectedFileName:$selectedFileName)
+                }
                 .navigationBarHidden(true)
                 .navigationTitle("健診一覧")
                 
-                FloatingBtn()
+                FloatingBtn(isOn:self.$showSheet)
             }
-            //.navigationTitle("健診一覧")
-            //.navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear{
+            let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            let ItemList = ListOfDirItems()
+            ItemList.setItems(dirURL: dirURL!)
+            folders = ItemList.sortByName()
+        }
     }
 }
 

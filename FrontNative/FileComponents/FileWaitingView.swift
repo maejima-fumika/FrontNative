@@ -1,28 +1,33 @@
 //
-//  waitingView.swift
+//  FileWaitingView.swift
 //  FrontNative
 //
-//  Created by 前島文香 on 2021/01/18.
+//  Created by 前島文香 on 2021/02/03.
 //
-
+//addNewFolderから新規ファイルを作るときに使う
+//基本的にはWaitingViewと同じ
 import SwiftUI
 import WebKit
 import PDFKit
 
-struct WaitingView: UIViewRepresentable {
+struct FileWaitingView: UIViewRepresentable {
     @EnvironmentObject var script: Javascript1
     var templatePath:String
     var webView:WKWebView
     @Binding var showingView:String
-    @Binding var files:[ItemAttribute]
-    @Binding var index:Int
-    @EnvironmentObject var path:Path
+    @Binding var errorText:String
+    @Binding var showSheet:Bool
+    @Binding var folders:[ItemAttribute]
+    @Binding var selectedPushedItem:Int?
     
-    init(templatePath:String, script:Javascript1, showingView:Binding<String>,files:Binding<[ItemAttribute]>,index:Binding<Int>) {
+    
+    init(templatePath:String, script:Javascript1, showingView:Binding<String>,errorText:Binding<String>,showSheet:Binding<Bool>, folders:Binding<[ItemAttribute]>, selectedPushedItem:Binding<Int?>) {
         self.templatePath = templatePath
         _showingView = showingView
-        _files = files
-        _index = index
+        _errorText = errorText
+        _showSheet = showSheet
+        _folders = folders
+        _selectedPushedItem = selectedPushedItem
         let webConfig = WKWebViewConfiguration()
         let userController = WKUserContentController()
         userController.addUserScript(WKUserScript(source: script.mkScript() ?? "'no script'", injectionTime: WKUserScriptInjectionTime.atDocumentEnd, forMainFrameOnly: true))
@@ -30,8 +35,8 @@ struct WaitingView: UIViewRepresentable {
         self.webView = WKWebView(frame: .zero,configuration: webConfig)
     }
     
-    func makeCoordinator() -> WaitingView.Coordinator {
-        Coordinator(parent:self, showingView:$showingView, files:$files,index:$index)
+    func makeCoordinator() -> FileWaitingView.Coordinator {
+        Coordinator(parent:self, showingView:$showingView, errorText:$errorText,showSheet:$showSheet, folders:$folders, selectedPushedItem:$selectedPushedItem)
     }
     
     func makeUIView(context: Context) -> UIActivityIndicatorView {
@@ -47,31 +52,35 @@ struct WaitingView: UIViewRepresentable {
     
     
     class Coordinator: NSObject, WKNavigationDelegate {
-        let parent: WaitingView
+        let parent: FileWaitingView
         @Binding var showingView:String
-        @Binding var files:[ItemAttribute]
-        @Binding var index:Int
+        @Binding var errorText:String
+        @Binding var showSheet:Bool
+        @Binding var folders:[ItemAttribute]
+        @Binding var selectedPushedItem:Int?
         
         
-        init(parent: WaitingView, showingView:Binding<String>,files:Binding<[ItemAttribute]>,index:Binding<Int>) {
+        init(parent: FileWaitingView, showingView:Binding<String>,errorText:Binding<String>,showSheet:Binding<Bool>,folders:Binding<[ItemAttribute]>, selectedPushedItem:Binding<Int?>) {
             self.parent = parent
             _showingView = showingView
-            _files = files
-            _index = index
+            _errorText = errorText
+            _showSheet = showSheet
+            _folders = folders
+            _selectedPushedItem = selectedPushedItem
         }
         
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            //            parent.path.fileIndex = 0
-            //            parent.path.URLs.append(parent.script.saveURL!)
             let pdfView = PDFView()
             pdfView.document = PDFDocument(data: createPDFpage())
             pdfView.document?.write(to:parent.script.saveURL!)
-            //fileURL = parent.script.saveURL!
-            let addFile = ItemAttribute(id: files.count, name: parent.script.mkFileName() ?? "undefined", date: Date(), url: parent.script.saveURL!)
-            files.append(addFile)
-            index = files.count - 1
-            showingView = "pdf"
+
+            let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            let ItemList = ListOfDirItems()
+            ItemList.setItems(dirURL: dirURL!)
+            folders = ItemList.sortByName()
+            selectedPushedItem = folders.filter({$0.name == parent.script.folderName()}).first?.id
+            showSheet = false
         }
         
         func createPDFpage() -> Data {
@@ -103,7 +112,7 @@ struct WaitingView: UIViewRepresentable {
 
 
 
-struct WaitingView_: View {
+struct FileWaitingView_: View {
     @State var title: String = ""
     @State var error: Error? = nil
     
@@ -133,3 +142,4 @@ struct WaitingView_: View {
 //            .edgesIgnoringSafeArea(.all)
 //    }
 //}
+
