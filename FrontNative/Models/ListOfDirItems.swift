@@ -15,12 +15,13 @@ class ListOfDirItems {
         var n = 0
         
         do {
-            let fileNames = try fileManager.contentsOfDirectory(atPath: dirURL.path)
+            //let fileNames = try fileManager.contentsOfDirectory(atPath: dirURL.path)
+            let fileNames = try fileManager.contentsOfDirectory(at: dirURL, includingPropertiesForKeys: nil,options: [.skipsHiddenFiles])
             for fileName in fileNames {
-                let fileURL = dirURL.appendingPathComponent(fileName)
+                let fileURL = dirURL.appendingPathComponent(fileName.lastPathComponent)
                 let fileAttribute = try fileManager.attributesOfItem(atPath: fileURL.path)
                 let filecreationDate = fileAttribute[FileAttributeKey.creationDate] as! Date
-                let itemAttribute = ItemAttribute(id:n, name:fileName, date:filecreationDate,url: fileURL)
+                let itemAttribute = ItemAttribute(id:n, name:fileName.lastPathComponent, date:filecreationDate,url: fileURL)
                 items.append(itemAttribute)
                 n += 1
             }
@@ -41,9 +42,13 @@ class ListOfDirItems {
     }
     
     func sortByDate()->[ItemAttribute]{
-        return items.sorted(by: { lItem, rItem -> Bool in
-            return lItem.date < rItem.date
+        var sortedItems = items.sorted(by: { lItem, rItem -> Bool in
+            return lItem.date > rItem.date
         })
+        for i in 0..<sortedItems.count {
+            sortedItems[i].id = i
+        }
+        return sortedItems
     }
     
 }

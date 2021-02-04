@@ -16,7 +16,6 @@ struct WaitingView: UIViewRepresentable {
     @Binding var showingView:String
     @Binding var files:[ItemAttribute]
     @Binding var index:Int
-    @EnvironmentObject var path:Path
     
     init(templatePath:String, script:Javascript1, showingView:Binding<String>,files:Binding<[ItemAttribute]>,index:Binding<Int>) {
         self.templatePath = templatePath
@@ -62,8 +61,6 @@ struct WaitingView: UIViewRepresentable {
         
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            //            parent.path.fileIndex = 0
-            //            parent.path.URLs.append(parent.script.saveURL!)
             let pdfView = PDFView()
             pdfView.document = PDFDocument(data: createPDFpage())
             pdfView.document?.write(to:parent.script.saveURL!)

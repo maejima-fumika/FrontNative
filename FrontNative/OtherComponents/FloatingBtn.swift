@@ -17,9 +17,9 @@ struct FloatingBtn: View {
                 Button(action: {
                     isOn = true
                 }, label: {
-                    Text("+")
+                    Text("健診を開始する")
                         .font(.system(.largeTitle))
-                        .frame(width: 77, height: 70)
+                        .frame(width: 300, height: 70)
                         .foregroundColor(Color.white)
                         .padding(.bottom, 7)
                 })

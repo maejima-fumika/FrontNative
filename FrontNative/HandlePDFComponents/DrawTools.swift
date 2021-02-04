@@ -9,24 +9,33 @@ import SwiftUI
 
 struct DrawTools: View {
     @EnvironmentObject var selectedTool:SelectedTool
+    @GestureState private var dragOffset = CGSize.zero
+    @State private var position = CGSize.zero
     var body: some View {
-        VStack {
-            Spacer()
+        GeometryReader { geometry in
             ZStack{
                 Capsule()
                     .fill(Color.white)
                     .frame(width: 300, height: 70, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 HStack{
-                    Button(action: {
-                        selectedTool.tool = .eraser
-                    }) {
-                        Image(systemName: "circle.dashed")
-                            .scaleEffect(1.5)
-                            .foregroundColor(Color.black)
-                            .frame(width: 60, height: 70)
-                            .padding(.bottom, 7)
-                    }
+//                    Button(action: {
+//                        selectedTool.tool = .eraser
+//                    }) {
+//                        Image(systemName: "circle.dashed")
+//                            .scaleEffect(1.5)
+//                            .foregroundColor(Color.black)
+//                            .frame(width: 60, height: 70)
+//                            .padding(.bottom, 7)
+//                    }
+//                    Image(systemName: "circle.dashed")
+//                                                .scaleEffect(1.5)
+//                                                .foregroundColor(Color.black)
+//                                                .frame(width: 60, height: 70)
+//                                                .padding(.bottom, 7)
+                    Circle()
+                        .trim(from: 0, to: 1)
+                        .frame(width: 30, height: 30, alignment: .leading)
                     Button(action: {
                         selectedTool.tool = .pencil
                         selectedTool.color = .black
@@ -59,13 +68,32 @@ struct DrawTools: View {
                     }
                 }
             }
-            
+            //.position(x: geometry.size.width/2-dragOffset.width, y: geometry.size.height-dragOffset.height-60)
+            .position(x: geometry.size.width/2 + position.width + dragOffset.width, y: geometry.size.height - 60 + position.height + dragOffset.height)
+            .onAppear{
+                print(geometry.size.width/2)
+                print(dragOffset.width)
+                print(position.width)
+            }
+            .gesture(
+                DragGesture()
+                    .updating($dragOffset, body: { (value, state, transaction) in
+                        state = value.translation
+                        print(dragOffset.width)
+                        print(state.width)
+                    })
+                    .onEnded({ (value) in
+                        
+                        self.position.height += value.translation.height
+                        self.position.width += value.translation.width
+                    })
+            )
         }
     }
 }
 
-//struct DrawTools_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DrawTools()
-//    }
-//}
+struct DrawTools_Previews: PreviewProvider {
+    static var previews: some View {
+        DrawTools()
+    }
+}

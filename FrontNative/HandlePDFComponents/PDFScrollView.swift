@@ -9,15 +9,13 @@ import SwiftUI
 
 struct PDFScrollView: View {
     @State private var offset: CGFloat = 0
-    @EnvironmentObject var path:Path
     var files : [ItemAttribute]
     @Binding var index:Int
-    //let url = Bundle.main.url(forResource: "Document", withExtension: "pdf")!
-//    init(files:[ItemAttribute],index:Int) {
-//        self.files = files
-//        self.index = index
-//        print("PDFScrollView")
-//    }
+    init(files:[ItemAttribute],index:Binding<Int>) {
+        self.files = files
+        _index = index
+        _offset = State(initialValue: -UIScreen.main.bounds.size.width * CGFloat(self.index))
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -31,9 +29,9 @@ struct PDFScrollView: View {
             }
             .content.offset(x: self.offset)
             .frame(width: geometry.size.width, height: nil, alignment: .leading)
-            .onAppear{
-                self.offset = -geometry.size.width * CGFloat(index)
-            }
+//            .onAppear{
+//                self.offset = -geometry.size.width * CGFloat(index)
+//            }
             .gesture(DragGesture()
                         .onChanged({ value in
                             self.offset = value.translation.width - geometry.size.width * CGFloat(index)

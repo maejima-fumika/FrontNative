@@ -13,20 +13,22 @@ import PDFKit
 struct FileWaitingView: UIViewRepresentable {
     @EnvironmentObject var script: Javascript1
     var templatePath:String
+    var folderName:String
     var webView:WKWebView
     @Binding var showingView:String
     @Binding var errorText:String
     @Binding var showSheet:Bool
-    @Binding var folders:[ItemAttribute]
+    @Binding var files:[ItemAttribute]
     @Binding var selectedPushedItem:Int?
     
     
-    init(templatePath:String, script:Javascript1, showingView:Binding<String>,errorText:Binding<String>,showSheet:Binding<Bool>, folders:Binding<[ItemAttribute]>, selectedPushedItem:Binding<Int?>) {
+    init(templatePath:String,folderName:String, script:Javascript1, showingView:Binding<String>,errorText:Binding<String>,showSheet:Binding<Bool>, files:Binding<[ItemAttribute]>, selectedPushedItem:Binding<Int?>) {
         self.templatePath = templatePath
+        self.folderName = folderName
         _showingView = showingView
         _errorText = errorText
         _showSheet = showSheet
-        _folders = folders
+        _files = files
         _selectedPushedItem = selectedPushedItem
         let webConfig = WKWebViewConfiguration()
         let userController = WKUserContentController()
@@ -36,7 +38,7 @@ struct FileWaitingView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> FileWaitingView.Coordinator {
-        Coordinator(parent:self, showingView:$showingView, errorText:$errorText,showSheet:$showSheet, folders:$folders, selectedPushedItem:$selectedPushedItem)
+        Coordinator(parent:self, showingView:$showingView, errorText:$errorText,showSheet:$showSheet, files:$files, selectedPushedItem:$selectedPushedItem)
     }
     
     func makeUIView(context: Context) -> UIActivityIndicatorView {
@@ -56,31 +58,40 @@ struct FileWaitingView: UIViewRepresentable {
         @Binding var showingView:String
         @Binding var errorText:String
         @Binding var showSheet:Bool
-        @Binding var folders:[ItemAttribute]
+        @Binding var files:[ItemAttribute]
         @Binding var selectedPushedItem:Int?
         
         
-        init(parent: FileWaitingView, showingView:Binding<String>,errorText:Binding<String>,showSheet:Binding<Bool>,folders:Binding<[ItemAttribute]>, selectedPushedItem:Binding<Int?>) {
+        init(parent: FileWaitingView, showingView:Binding<String>,errorText:Binding<String>,showSheet:Binding<Bool>,files:Binding<[ItemAttribute]>, selectedPushedItem:Binding<Int?>) {
             self.parent = parent
             _showingView = showingView
             _errorText = errorText
             _showSheet = showSheet
-            _folders = folders
+            _files = files
             _selectedPushedItem = selectedPushedItem
         }
         
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            if parent.script.folderName() != parent.folderName {
+                    errorText = "健診名が違います。健診一覧からQRコードを読み込んでください。"
+                    showingView = "error"
+            }
+            else {
+            
             let pdfView = PDFView()
             pdfView.document = PDFDocument(data: createPDFpage())
             pdfView.document?.write(to:parent.script.saveURL!)
-
-            let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            
+            let path = parent.script.folderName()
+            let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(path ?? "")
+            //let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             let ItemList = ListOfDirItems()
             ItemList.setItems(dirURL: dirURL!)
-            folders = ItemList.sortByName()
-            selectedPushedItem = folders.filter({$0.name == parent.script.folderName()}).first?.id
+            files = ItemList.sortByDate()
+            selectedPushedItem = files.filter({$0.name == (parent.script.mkFileName() ?? "nothing")+".pdf"}).first?.id
             showSheet = false
+            }
         }
         
         func createPDFpage() -> Data {

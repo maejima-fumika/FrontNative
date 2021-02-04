@@ -9,15 +9,24 @@ import SwiftUI
 
 struct AllFiles: View {
     let folder:ItemAttribute?
-    let selectedFileName:String
+    @Binding var selectedFileName:String
     @State private var files = [ItemAttribute]()
     @State private var showSheet = false
     @State var selectedPushedItem:Int?
     @EnvironmentObject var path:Path
     
-    init(folder:ItemAttribute?,selectedFileName:String="nothing") {
+    init(folder:ItemAttribute?,selectedFileName:Binding<String>) {
         self.folder = folder
-        self.selectedFileName = selectedFileName
+        
+        let path = self.folder?.name
+        let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(path ?? "")
+        let ItemList = ListOfDirItems()
+        ItemList.setItems(dirURL: dirURL!)
+        _files = State(initialValue: ItemList.sortByDate())
+        _selectedFileName = selectedFileName
+        let id:Int? = self.files.filter({$0.name == (self.selectedFileName+".pdf")}).first?.id
+        _selectedPushedItem = State(initialValue:id)
+        self.selectedFileName = "nothing"
     }
     
 
@@ -46,19 +55,16 @@ struct AllFiles: View {
                     Spacer()
                 }
                 .sheet(isPresented: $showSheet){
-                    AddNewFile(showSheet: $showSheet,folders:$files, selectedPushedItem:$selectedPushedItem)
+                    AddNewFile(showSheet: $showSheet,files:$files, selectedPushedItem:$selectedPushedItem, folderName: folder?.name ?? "nothing")
                 }
+                FloatingBtn(isOn:self.$showSheet)
             }
             .onAppear{
                 let path = folder?.name
-                //print(path)
                 let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(path ?? "")
                 let ItemList = ListOfDirItems()
                 ItemList.setItems(dirURL: dirURL!)
-                files = ItemList.sortByName()
-                if selectedFileName != "nothing"{
-                    selectedPushedItem = files.filter({$0.name == (selectedFileName+".pdf")}).first?.id 
-                }
+                files = ItemList.sortByDate()
             }
             .navigationBarTitle(Text(folder?.name ?? "ファイル一覧"))
 

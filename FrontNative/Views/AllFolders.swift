@@ -16,8 +16,8 @@ struct AllFolders: View {
         NavigationView {
             ZStack {
                 VStack {
-                    Header()
-                    Divider()
+//                    Header()
+//                    Divider()
                     Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
                         Text("日付").tag(1)
                         Text("名前").tag(2)
@@ -27,7 +27,7 @@ struct AllFolders: View {
                     .frame(width: 300)
                     List{
                         ForEach(folders, id:\.self){ folder in
-                            NavigationLink(destination: AllFiles(folder:folder,selectedFileName:selectedFileName),tag:folder.id,selection:$selectedPushedItem){
+                            NavigationLink(destination: AllFiles(folder:folder,selectedFileName:$selectedFileName),tag:folder.id,selection:$selectedPushedItem){
                                 FolderListComponent(folder:folder)
                             }
                             .padding([.top, .leading, .trailing], 15.0)
@@ -38,8 +38,14 @@ struct AllFolders: View {
                 .sheet(isPresented: $showSheet){
                     AddNewFolder(showSheet: $showSheet,folders:$folders, selectedPushedItem:$selectedPushedItem,selectedFileName:$selectedFileName)
                 }
-                .navigationBarHidden(true)
+                //.navigationBarHidden(true)
                 .navigationTitle("健診一覧")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing){
+                        Button("選択") {}
+                    }
+                }
                 
                 FloatingBtn(isOn:self.$showSheet)
             }
@@ -49,7 +55,7 @@ struct AllFolders: View {
             let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             let ItemList = ListOfDirItems()
             ItemList.setItems(dirURL: dirURL!)
-            folders = ItemList.sortByName()
+            folders = ItemList.sortByDate()
         }
     }
 }

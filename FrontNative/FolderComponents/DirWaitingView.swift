@@ -83,7 +83,7 @@ struct DirWaitingView: UIViewRepresentable {
             let dirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             let ItemList = ListOfDirItems()
             ItemList.setItems(dirURL: dirURL!)
-            folders = ItemList.sortByName()
+            folders = ItemList.sortByDate()
             selectedPushedItem = folders.filter({$0.name == parent.script.folderName()}).first?.id
             showSheet = false
         }

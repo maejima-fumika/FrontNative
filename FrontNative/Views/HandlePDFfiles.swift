@@ -52,9 +52,9 @@ struct HandlePDFfiles: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing:
                                 Button(action: {
-                                    self.showingView = "qrcode"
+                                    self.showingView = (self.showingView == "pdf") ? "qrcode":"pdf"
                                 }) {
-                                    Image(systemName: "camera")
+                                    Image(systemName: self.showingView == "pdf" ? "camera":"square.and.pencil")
                                         .scaleEffect(1.2)
                                 }
         )

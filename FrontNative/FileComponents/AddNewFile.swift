@@ -13,11 +13,12 @@ import SwiftUI
 
 struct AddNewFile: View {
     @Binding var showSheet: Bool
-    @Binding var folders:[ItemAttribute]
+    @Binding var files:[ItemAttribute]
     @Binding var selectedPushedItem:Int?
     @State private var showingView = "qrcode"
     @State private var errorText = "error"
     @StateObject private var script = Javascript1()
+    var folderName:String
     
     var body: some View {
         NavigationView {
@@ -27,10 +28,11 @@ struct AddNewFile: View {
                     QRcodeView(showingView:$showingView)
                 }
                 else if showingView == "waiting"{
-                    FileWaitingView(templatePath: templatePath, script: script, showingView: $showingView, errorText: $errorText,showSheet:$showSheet,folders:$folders, selectedPushedItem:$selectedPushedItem)
+                    FileWaitingView(templatePath: templatePath, folderName: folderName, script: script, showingView: $showingView, errorText: $errorText,showSheet:$showSheet,files:$files, selectedPushedItem:$selectedPushedItem)
                 }
                 else{
-                    Text(errorText)
+                    Text("エラー：\(errorText)")
+                        .foregroundColor(.red)
                 }
             }
             .environmentObject(script)
