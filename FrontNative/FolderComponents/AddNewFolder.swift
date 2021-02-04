@@ -24,13 +24,13 @@ struct AddNewFolder: View {
             let templatePath =  Bundle.main.path(forResource: "template1", ofType: "html")!
             VStack{
                 if showingView == "qrcode"{
-                    QRcodeView(showingView:$showingView)
+                    QRcodeView(showingView:$showingView,errorText:$errorText)
                 }
                 else if showingView == "waiting"{
                     DirWaitingView(templatePath: templatePath, script: script, showingView: $showingView, errorText: $errorText,showSheet:$showSheet,folders:$folders, selectedPushedItem:$selectedPushedItem,selectedFileName:$selectedFileName)
                 }
                 else{
-                    Text(errorText)
+                    QRcodeError(errorText: $errorText, showingView: $showingView)
                 }
             }
             .environmentObject(script)

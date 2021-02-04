@@ -25,14 +25,13 @@ struct AddNewFile: View {
             let templatePath =  Bundle.main.path(forResource: "template1", ofType: "html")!
             VStack{
                 if showingView == "qrcode"{
-                    QRcodeView(showingView:$showingView)
+                    QRcodeView(showingView:$showingView,errorText: $errorText)
                 }
                 else if showingView == "waiting"{
                     FileWaitingView(templatePath: templatePath, folderName: folderName, script: script, showingView: $showingView, errorText: $errorText,showSheet:$showSheet,files:$files, selectedPushedItem:$selectedPushedItem)
                 }
                 else{
-                    Text("エラー：\(errorText)")
-                        .foregroundColor(.red)
+                    QRcodeError(errorText: $errorText, showingView: $showingView)
                 }
             }
             .environmentObject(script)

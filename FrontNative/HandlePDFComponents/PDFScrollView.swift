@@ -11,9 +11,11 @@ struct PDFScrollView: View {
     @State private var offset: CGFloat = 0
     var files : [ItemAttribute]
     @Binding var index:Int
-    init(files:[ItemAttribute],index:Binding<Int>) {
+    @Binding var showingView:String
+    init(files:[ItemAttribute],index:Binding<Int>, showingView:Binding<String>) {
         self.files = files
         _index = index
+        _showingView = showingView
         _offset = State(initialValue: -UIScreen.main.bounds.size.width * CGFloat(self.index))
     }
     
@@ -38,7 +40,10 @@ struct PDFScrollView: View {
                         })
                         .onEnded({ value in
                             let scrollThreshold = geometry.size.width / 2
-                            if value.predictedEndTranslation.width < -scrollThreshold {
+                            if value.predictedEndTranslation.width < -scrollThreshold  {
+                                if index == files.count - 1{
+                                    showingView = "qrcode"
+                                }
                                 index = min(index + 1, files.count-1)
                             } else if value.predictedEndTranslation.width > scrollThreshold {
                                 index = max(index - 1, 0)

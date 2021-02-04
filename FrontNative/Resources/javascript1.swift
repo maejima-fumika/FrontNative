@@ -12,7 +12,7 @@ class Javascript1: ObservableObject {
     @Published var saveURL:URL?
     private var decodedAnswer:DecodedAnswer?
     
-    private struct Answer:Decodable {
+    private struct Answer:Decodable { 
         let eid:String
         let uid:String
         let n:String

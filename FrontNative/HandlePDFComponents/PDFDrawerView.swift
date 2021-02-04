@@ -54,7 +54,6 @@ struct PDFDrawerView: UIViewRepresentable {
             let convertedPoint = parent.pdfView.convert(location, to: parent.currentPage!)
             parent.path = UIBezierPath()
             parent.path?.move(to: convertedPoint)
-            print(parent.selectedTool.color)
         }
         
         func gestureRecognizerMoved(_ location: CGPoint) {

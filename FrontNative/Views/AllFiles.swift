@@ -45,7 +45,7 @@ struct AllFiles: View {
                     .frame(width: 300)
                     List{
                         ForEach(files, id:\.self.id){ file in
-                            NavigationLink(destination: HandlePDFfiles(showView: "pdf",files: files, index: file.id),tag:file.id,selection:$selectedPushedItem){
+                            NavigationLink(destination: HandlePDFfiles(showingView: "pdf",files: files, index: file.id),tag:file.id,selection:$selectedPushedItem){
                                 FileListComponent(file:file) 
                             }
                             .padding([.top, .leading, .trailing], 15.0)
