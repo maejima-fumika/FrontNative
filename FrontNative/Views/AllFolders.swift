@@ -12,21 +12,22 @@ struct AllFolders: View {
     @State private var showSheet = false
     @State var selectedPushedItem:Int?
     @State var selectedFileName = "nothing"
+    @ObservedObject var sortItems = SortItems()
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
-//                    Header()
-//                    Divider()
-                    Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
-                        Text("日付").tag(1)
-                        Text("名前").tag(2)
-                    }
+                    //                    Header()
+                    //                    Divider()
+                    Picker("",selection:$sortItems.currentMode,content:{
+                        Text("日付").tag(SortItems.SortMode.date)
+                        Text("名前").tag(SortItems.SortMode.name)
+                    })
                     .padding(.top)
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 300)
                     List{
-                        ForEach(folders, id:\.self){ folder in
+                        ForEach(self.sortItems.currentMode.sortedItems(items: folders), id:\.self){ folder in
                             NavigationLink(destination: AllFiles(folder:folder,selectedFileName:$selectedFileName),tag:folder.id,selection:$selectedPushedItem){
                                 FolderListComponent(folder:folder)
                             }

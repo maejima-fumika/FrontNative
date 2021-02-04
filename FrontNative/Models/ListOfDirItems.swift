@@ -9,6 +9,7 @@ import Foundation
 class ListOfDirItems {
     var items = [ItemAttribute]()
     
+    
     func setItems(dirURL:URL){
         //print(dirName)
         let fileManager = FileManager.default
@@ -31,9 +32,10 @@ class ListOfDirItems {
         
     }
     
-    func sortByName()->[ItemAttribute]{
+    
+    func sortByDate()->[ItemAttribute]{
         var sortedItems = items.sorted(by: { lItem, rItem -> Bool in
-            return lItem.name < rItem.name
+            return lItem.date < rItem.date
         })
         for i in 0..<sortedItems.count {
             sortedItems[i].id = i
@@ -41,15 +43,34 @@ class ListOfDirItems {
         return sortedItems
     }
     
-    func sortByDate()->[ItemAttribute]{
-        var sortedItems = items.sorted(by: { lItem, rItem -> Bool in
-            return lItem.date > rItem.date
-        })
-        for i in 0..<sortedItems.count {
-            sortedItems[i].id = i
+}
+
+class SortItems: ObservableObject {
+    enum SortMode:String, Identifiable, CaseIterable {
+        case date = "日付"
+        case name = "名前"
+        
+        var id: String { self.rawValue }
+        
+        func sortedItems(items:[ItemAttribute])->[ItemAttribute]{
+            switch self {
+            case .date:
+                let sortedItems = items.sorted(by: { lItem, rItem -> Bool in
+                    return lItem.date > rItem.date
+                })
+                return sortedItems
+            case .name:
+                let sortedItems = items.sorted(by: { lItem, rItem -> Bool in
+                    return lItem.name < rItem.name
+                })
+                return sortedItems
+//            default:
+//                return items
+            }
         }
-        return sortedItems
     }
+   
+    @Published var currentMode:SortMode = .date
     
 }
 

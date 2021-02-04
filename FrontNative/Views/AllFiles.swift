@@ -13,7 +13,7 @@ struct AllFiles: View {
     @State private var files = [ItemAttribute]()
     @State private var showSheet = false
     @State var selectedPushedItem:Int?
-    @EnvironmentObject var path:Path
+    @ObservedObject var sortItems = SortItems()
     
     init(folder:ItemAttribute?,selectedFileName:Binding<String>) {
         self.folder = folder
@@ -36,15 +36,15 @@ struct AllFiles: View {
             ZStack {
                 VStack {
                     Divider()
-                    Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
-                        Text("日付").tag(1)
-                        Text("名前").tag(2)
-                    }
+                    Picker("",selection:$sortItems.currentMode,content:{
+                        Text("日付").tag(SortItems.SortMode.date)
+                        Text("名前").tag(SortItems.SortMode.name)
+                    })
                     .padding(.top)
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 300)
                     List{
-                        ForEach(files, id:\.self.id){ file in
+                        ForEach(self.sortItems.currentMode.sortedItems(items:files), id:\.self.id){ file in
                             NavigationLink(destination: HandlePDFfiles(showingView: "pdf",files: files, index: file.id),tag:file.id,selection:$selectedPushedItem){
                                 FileListComponent(file:file) 
                             }
