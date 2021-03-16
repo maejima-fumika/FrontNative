@@ -105,7 +105,7 @@
 //    @State var error: Error? = nil
 //
 //    var body: some View {
-//        let fileURLWithPath =  Bundle.main.path(forResource: "template1", ofType: "html")!
+//        let fileURLWithPath =  Bundle.main.path(forResource: "template2", ofType: "html")!
 ////        let answerString = """
 ////                {
 ////                    "eid": "T123456",
@@ -119,7 +119,7 @@
 ////                    "d":"1?0?0?0?0?0?0?0?0?0?0?1%E7%94%9F%E3%81%AE%E9%B6%8F%E5%8D%B5?1%E3%82%A4%E3%83%B3%E3%83%95%E3%83%AB%E3%82%A8%E3%83%B3%E3%82%B6%E4%BA%88%E9%98%B2%E6%8E%A5%E7%A8%AE?0?0?0?"
 ////                }
 ////    """
-//        //let script = Javascript1(answerString:answerString)
+//        //let script = Javascript2(answerString:answerString)
 ////        FileView(fileURLWithPath:fileURLWithPath,script: script.mkScript())
 //    }
 //}

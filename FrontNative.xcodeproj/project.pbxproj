@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		982F197625B01E3200383DA6 /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982F197525B01E3200383DA6 /* TestFunc.swift */; };
 		982F197A25B0454800383DA6 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 982F197925B0454800383DA6 /* CodeScanner */; };
 		983A9CF825C8324F0096C501 /* PDFTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983A9CF725C8324F0096C501 /* PDFTabView.swift */; };
 		983A9CFB25CA5EC80096C501 /* AddNewFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983A9CFA25CA5EC80096C501 /* AddNewFolder.swift */; };
@@ -16,8 +15,11 @@
 		983A9D0525CA85A00096C501 /* FileWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983A9D0425CA85A00096C501 /* FileWaitingView.swift */; };
 		983A9D0825CBD6040096C501 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983A9D0725CBD6030096C501 /* ActivityView.swift */; };
 		983A9D0B25CBF3170096C501 /* QRcodeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983A9D0A25CBF3170096C501 /* QRcodeError.swift */; };
+		983A9D1225CC32680096C501 /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983A9D1125CC32680096C501 /* ActionButtons.swift */; };
+		983A9D1625CCD3BE0096C501 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 983A9D1525CCD3BE0096C501 /* Zip */; };
 		9849B56E25AC182F00302749 /* template1.html in Resources */ = {isa = PBXBuildFile; fileRef = 9849B56D25AC182E00302749 /* template1.html */; };
 		9849B57225AC259A00302749 /* javascript1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B57125AC259A00302749 /* javascript1.swift */; };
+		986E5AEF25D606530014E927 /* PencilkitcanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E5AEE25D606530014E927 /* PencilkitcanvasView.swift */; };
 		9887996B25B16FF200278F64 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887996A25B16FF200278F64 /* Path.swift */; };
 		9887996E25B55D5500278F64 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887996D25B55D5500278F64 /* WaitingView.swift */; };
 		9887997125B55D9200278F64 /* PDFDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887997025B55D9200278F64 /* PDFDrawerView.swift */; };
@@ -25,7 +27,6 @@
 		9887997E25B6CEE900278F64 /* ListOfDirItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9887997D25B6CEE900278F64 /* ListOfDirItems.swift */; };
 		98BC16D925B73DCB0006AFE4 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BC16D825B73DCB0006AFE4 /* DateUtils.swift */; };
 		98BC16DC25B976A20006AFE4 /* QuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BC16DB25B976A20006AFE4 /* QuickLook.swift */; };
-		98BC16DF25B99A800006AFE4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BC16DE25B99A800006AFE4 /* TestView.swift */; };
 		98BC16E225B9C8A50006AFE4 /* PDFScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BC16E125B9C8A50006AFE4 /* PDFScrollView.swift */; };
 		98C6665A259A1ADD0056D2A8 /* FrontNativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C66659259A1ADD0056D2A8 /* FrontNativeApp.swift */; };
 		98C6665C259A1ADD0056D2A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C6665B259A1ADD0056D2A8 /* ContentView.swift */; };
@@ -50,10 +51,11 @@
 		98C666B325A336E00056D2A8 /* PDFAnnotationWithPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C666B225A336E00056D2A8 /* PDFAnnotationWithPath.swift */; };
 		98C666B725A337250056D2A8 /* PDFPage+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C666B625A337250056D2A8 /* PDFPage+Selection.swift */; };
 		98C666BA25A3376D0056D2A8 /* UIBezierPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C666B925A3376C0056D2A8 /* UIBezierPath+.swift */; };
+		98EF886D26008B0C001721D2 /* javascript2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EF886C26008B0B001721D2 /* javascript2.swift */; };
+		98EF887026008B37001721D2 /* template2.html in Resources */ = {isa = PBXBuildFile; fileRef = 98EF886F26008B37001721D2 /* template2.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		982F197525B01E3200383DA6 /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
 		983A9CF725C8324F0096C501 /* PDFTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTabView.swift; sourceTree = "<group>"; };
 		983A9CFA25CA5EC80096C501 /* AddNewFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFolder.swift; sourceTree = "<group>"; };
 		983A9CFD25CA65FE0096C501 /* DirWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirWaitingView.swift; sourceTree = "<group>"; };
@@ -61,8 +63,10 @@
 		983A9D0425CA85A00096C501 /* FileWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWaitingView.swift; sourceTree = "<group>"; };
 		983A9D0725CBD6030096C501 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		983A9D0A25CBF3170096C501 /* QRcodeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRcodeError.swift; sourceTree = "<group>"; };
+		983A9D1125CC32680096C501 /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
 		9849B56D25AC182E00302749 /* template1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template1.html; sourceTree = "<group>"; };
 		9849B57125AC259A00302749 /* javascript1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = javascript1.swift; sourceTree = "<group>"; };
+		986E5AEE25D606530014E927 /* PencilkitcanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilkitcanvasView.swift; sourceTree = "<group>"; };
 		9887996A25B16FF200278F64 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		9887996D25B55D5500278F64 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		9887997025B55D9200278F64 /* PDFDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDrawerView.swift; sourceTree = "<group>"; };
@@ -70,7 +74,6 @@
 		9887997D25B6CEE900278F64 /* ListOfDirItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfDirItems.swift; sourceTree = "<group>"; };
 		98BC16D825B73DCB0006AFE4 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		98BC16DB25B976A20006AFE4 /* QuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLook.swift; sourceTree = "<group>"; };
-		98BC16DE25B99A800006AFE4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		98BC16E125B9C8A50006AFE4 /* PDFScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFScrollView.swift; sourceTree = "<group>"; };
 		98C66656259A1ADD0056D2A8 /* FrontNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98C66659259A1ADD0056D2A8 /* FrontNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontNativeApp.swift; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 		98C666B225A336E00056D2A8 /* PDFAnnotationWithPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFAnnotationWithPath.swift; sourceTree = "<group>"; };
 		98C666B625A337250056D2A8 /* PDFPage+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFPage+Selection.swift"; sourceTree = "<group>"; };
 		98C666B925A3376C0056D2A8 /* UIBezierPath+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+.swift"; sourceTree = "<group>"; };
+		98EF886C26008B0B001721D2 /* javascript2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = javascript2.swift; sourceTree = "<group>"; };
+		98EF886F26008B37001721D2 /* template2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template2.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				983A9D1625CCD3BE0096C501 /* Zip in Frameworks */,
 				982F197A25B0454800383DA6 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		986E5AED25D606170014E927 /* Pencilkit */ = {
+			isa = PBXGroup;
+			children = (
+				986E5AEE25D606530014E927 /* PencilkitcanvasView.swift */,
+			);
+			path = Pencilkit;
+			sourceTree = "<group>";
+		};
 		98C6664D259A1ADD0056D2A8 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +144,7 @@
 		98C66658259A1ADD0056D2A8 /* FrontNative */ = {
 			isa = PBXGroup;
 			children = (
+				986E5AED25D606170014E927 /* Pencilkit */,
 				98C666A125A313DA0056D2A8 /* PDFClasses */,
 				98C6669A259B519C0056D2A8 /* Resources */,
 				98C6668E259B04BD0056D2A8 /* HandlePDFComponents */,
@@ -170,8 +185,6 @@
 				98C6666F259A1D240056D2A8 /* AllFolders.swift */,
 				98C6667E259AF1C20056D2A8 /* AllFiles.swift */,
 				98C6668B259B04980056D2A8 /* HandlePDFfiles.swift */,
-				982F197525B01E3200383DA6 /* TestFunc.swift */,
-				98BC16DE25B99A800006AFE4 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +218,7 @@
 				98BC16D825B73DCB0006AFE4 /* DateUtils.swift */,
 				983A9D0725CBD6030096C501 /* ActivityView.swift */,
 				983A9D0A25CBF3170096C501 /* QRcodeError.swift */,
+				983A9D1125CC32680096C501 /* ActionButtons.swift */,
 			);
 			path = OtherComponents;
 			sourceTree = "<group>";
@@ -229,8 +243,10 @@
 			isa = PBXGroup;
 			children = (
 				9849B56D25AC182E00302749 /* template1.html */,
+				98EF886F26008B37001721D2 /* template2.html */,
 				98C6669B259B51E90056D2A8 /* Document.pdf */,
 				9849B57125AC259A00302749 /* javascript1.swift */,
+				98EF886C26008B0B001721D2 /* javascript2.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -267,6 +283,7 @@
 			name = FrontNative;
 			packageProductDependencies = (
 				982F197925B0454800383DA6 /* CodeScanner */,
+				983A9D1525CCD3BE0096C501 /* Zip */,
 			);
 			productName = FrontNative;
 			productReference = 98C66656259A1ADD0056D2A8 /* FrontNative.app */;
@@ -297,6 +314,7 @@
 			mainGroup = 98C6664D259A1ADD0056D2A8;
 			packageReferences = (
 				982F197825B0454800383DA6 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				983A9D1425CCD3BD0096C501 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 98C66657259A1ADD0056D2A8 /* Products */;
 			projectDirPath = "";
@@ -312,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98EF887026008B37001721D2 /* template2.html in Resources */,
 				98C66661259A1AE50056D2A8 /* Preview Assets.xcassets in Resources */,
 				9849B56E25AC182F00302749 /* template1.html in Resources */,
 				98C6665E259A1AE50056D2A8 /* Assets.xcassets in Resources */,
@@ -332,23 +351,24 @@
 				9887996E25B55D5500278F64 /* WaitingView.swift in Sources */,
 				98C66698259B2CC60056D2A8 /* FileView.swift in Sources */,
 				98C66694259B23F60056D2A8 /* DrawTools.swift in Sources */,
+				986E5AEF25D606530014E927 /* PencilkitcanvasView.swift in Sources */,
 				98C66683259AF1F30056D2A8 /* FileListComponent.swift in Sources */,
 				983A9CFE25CA65FE0096C501 /* DirWaitingView.swift in Sources */,
 				98C666BA25A3376D0056D2A8 /* UIBezierPath+.swift in Sources */,
-				98BC16DF25B99A800006AFE4 /* TestView.swift in Sources */,
 				98C6668C259B04980056D2A8 /* HandlePDFfiles.swift in Sources */,
 				98C6667F259AF1C20056D2A8 /* AllFiles.swift in Sources */,
-				982F197625B01E3200383DA6 /* TestFunc.swift in Sources */,
 				983A9D0825CBD6040096C501 /* ActivityView.swift in Sources */,
 				98C66675259A23140056D2A8 /* Header.swift in Sources */,
 				9887997725B5B93D00278F64 /* QRcodeView.swift in Sources */,
 				9887997125B55D9200278F64 /* PDFDrawerView.swift in Sources */,
 				9887997E25B6CEE900278F64 /* ListOfDirItems.swift in Sources */,
+				98EF886D26008B0C001721D2 /* javascript2.swift in Sources */,
 				983A9D0125CA84FE0096C501 /* AddNewFile.swift in Sources */,
 				98C666AA25A315170056D2A8 /* DrawingGestureRecognizer.swift in Sources */,
 				98C66691259B1D5A0056D2A8 /* Eraser.swift in Sources */,
 				98C666B725A337250056D2A8 /* PDFPage+Selection.swift in Sources */,
 				98C666B325A336E00056D2A8 /* PDFAnnotationWithPath.swift in Sources */,
+				983A9D1225CC32680096C501 /* ActionButtons.swift in Sources */,
 				98C666A725A314990056D2A8 /* DrawingAnnotation.swift in Sources */,
 				98C66689259AF54F0056D2A8 /* FloatingBtn.swift in Sources */,
 				98C6665C259A1ADD0056D2A8 /* ContentView.swift in Sources */,
@@ -562,6 +582,14 @@
 				minimumVersion = 1.0.7;
 			};
 		};
+		983A9D1425CCD3BD0096C501 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -569,6 +597,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 982F197825B0454800383DA6 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		983A9D1525CCD3BE0096C501 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 983A9D1425CCD3BD0096C501 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

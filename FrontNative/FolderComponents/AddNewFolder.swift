@@ -17,11 +17,11 @@ struct AddNewFolder: View {
     @State private var showingView = "qrcode"
     @State private var errorText = "error"
     //@State private var onNavigation = false
-    @StateObject private var script = Javascript1() 
+    @StateObject private var script = Javascript2() 
     
     var body: some View {
         NavigationView {
-            let templatePath =  Bundle.main.path(forResource: "template1", ofType: "html")!
+            let templatePath =  Bundle.main.path(forResource: "template2", ofType: "html")!
             VStack{
                 if showingView == "qrcode"{
                     QRcodeView(showingView:$showingView,errorText:$errorText)

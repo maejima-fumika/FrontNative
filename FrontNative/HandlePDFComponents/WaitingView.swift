@@ -10,14 +10,14 @@ import WebKit
 import PDFKit
 
 struct WaitingView: UIViewRepresentable {
-    @EnvironmentObject var script: Javascript1
+    @EnvironmentObject var script: Javascript2
     var templatePath:String
     var webView:WKWebView
     @Binding var showingView:String
     @Binding var files:[ItemAttribute]
     @Binding var index:Int
     
-    init(templatePath:String, script:Javascript1, showingView:Binding<String>,files:Binding<[ItemAttribute]>,index:Binding<Int>) {
+    init(templatePath:String, script:Javascript2, showingView:Binding<String>,files:Binding<[ItemAttribute]>,index:Binding<Int>) {
         self.templatePath = templatePath
         _showingView = showingView
         _files = files
@@ -105,7 +105,7 @@ struct WaitingView_: View {
     @State var error: Error? = nil
     
     var body: some View {
-        let fileURLWithPath =  Bundle.main.path(forResource: "template1", ofType: "html")!
+        let fileURLWithPath =  Bundle.main.path(forResource: "template2", ofType: "html")!
         //        let answerString = """
         //                {
         //                    "eid": "T123456",
@@ -119,7 +119,7 @@ struct WaitingView_: View {
         //                    "d":"1?0?0?0?0?0?0?0?0?0?0?1%E7%94%9F%E3%81%AE%E9%B6%8F%E5%8D%B5?1%E3%82%A4%E3%83%B3%E3%83%95%E3%83%AB%E3%82%A8%E3%83%B3%E3%82%B6%E4%BA%88%E9%98%B2%E6%8E%A5%E7%A8%AE?0?0?0?"
         //                }
         //    """
-        //let script = Javascript1(answerString:answerString)
+        //let script = Javascript2(answerString:answerString)
         //        WaitingView(fileURLWithPath:fileURLWithPath,script: script.mkScript())
     }
 }

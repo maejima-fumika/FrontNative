@@ -1,0 +1,498 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div class="sheet-title">
+        <h1>問診票</h1>
+      </div>
+      <div class="date-style">受診日：<span id="date_today"></span></div>
+      <div>
+        <table
+          border="1"
+          style="border-collapse: collapse"
+          class="base_data_table same-font-size"
+        >
+          <tr>
+            <td
+              width="70%"
+              style="border-bottom: 0.4mm solid; border-right: 0.4mm solid"
+            >
+              名前
+            </td>
+            <td style="border-bottom: 0.4mm solid; border-right: 0.4mm solid">
+              年齢
+            </td>
+            <td style="border-bottom: 0.4mm solid">性別</td>
+          </tr>
+          <tr style="font-weight: bold; height: 5mm">
+            <td id="n" style="border-right: 0.4mm solid"></td>
+            <td id="a" style="border-right: 0.4mm solid"></td>
+            <td id="g" style="border-right: 0.4mm solid"></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <table
+          border="1"
+          style="border-collapse: collapse"
+          class="question_table same-font-size"
+        >
+          <tr>
+            <td width="45%" class="question_cell">
+              医師から、脳卒中(脳出血、脳梗塞等)にかかっていると言われたり、治療を受けたことはありますか？
+            </td>
+            <td colspan="2" id="q1_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q1_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              医師から、心臓病(狭心症、心筋梗塞等)にかかっていると言われたり、治療を受けたことはありますか？
+            </td>
+            <td colspan="2" id="q2_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q2_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              医師から貧血と言われたことはありますか？
+            </td>
+            <td colspan="2" id="q3_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q3_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">現在、喫煙されていますか？</td>
+            <td colspan="2" id="q4_a1" style="border-bottom: 0.4mm solid">
+              紙タバコを吸っています
+            </td>
+            <td id="q4_a2" style="border-bottom: 0.4mm solid" width="17%">
+              電子タバコを吸っています
+            </td>
+            <td id="q4_a3" style="border-bottom: 0.4mm solid">
+              喫煙していません
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              喫煙されている方は１日あたりどのくらい吸っていますか？(紙、電子合わせて)
+            </td>
+            <td id="q5_a1" style="border-bottom: 0.4mm solid">10本未満</td>
+            <td id="q5_a2" style="border-bottom: 0.4mm solid">10~19本</td>
+            <td id="q5_a3" style="border-bottom: 0.4mm solid">20本以上</td>
+            <td id="q5_a4" style="border-bottom: 0.4mm solid">
+              喫煙していません
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              喫煙されている方は喫煙期間はどれくらいですか？(紙、電子合わせて)
+            </td>
+            <td id="q6_a1" style="border-bottom: 0.4mm solid">1年未満</td>
+            <td id="q6_a2" style="border-bottom: 0.4mm solid">1~5年</td>
+            <td id="q6_a3" style="border-bottom: 0.4mm solid">5年以上</td>
+            <td id="q6_a4" style="border-bottom: 0.4mm solid">
+              喫煙していません
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell" id="q_a">
+              20歳の時と比べて体重が10kg以上増えた
+            </td>
+            <td colspan="2" id="q7_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q7_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              1日30分以上、軽く汗をかく程度以上の運動を週2日以上、1年以上実施していますか？
+            </td>
+            <td colspan="2" id="q8_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q8_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              日常生活で歩行または同等以上の身体活動を1日1時間以上実施していますか？
+            </td>
+            <td colspan="2" id="q9_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q9_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              ほぼ同じ年齢の同性と比較して歩く速度が速いですか？
+            </td>
+            <td colspan="2" id="q10_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q10_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="3" class="question_cell">
+              食事を噛んで食べるときの状態は次のどれに当たりますか？
+            </td>
+            <td colspan="4" id="q11_a1">何でも噛んで食べることができる</td>
+          </tr>
+          <tr>
+            <td colspan="4" id="q11_a2">
+              歯や歯ぐき、噛み合わせなど気になる部分があり、噛みにくいことがある
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="q11_a3" style="border-bottom: 0.4mm solid">
+              ほとんど噛めない
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">人と比較して食べるのが…</td>
+            <td id="q12_a1" style="border-bottom: 0.4mm solid">早い</td>
+            <td id="q12_a2" style="border-bottom: 0.4mm solid">普通</td>
+            <td id="q12_a3" style="border-bottom: 0.4mm solid">遅い</td>
+            <td style="border-bottom: 0.4mm solid"></td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              就寝前の2時間以内の夕食が週3回以上ある
+            </td>
+            <td colspan="2" id="q13_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q13_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">朝食を抜くことが週3回以上ある</td>
+            <td colspan="2" id="q14_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q14_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">お酒を飲む習慣は…</td>
+            <td id="q15_a1" style="border-bottom: 0.4mm solid">ほぼ無い</td>
+            <td id="q15_a2" style="border-bottom: 0.4mm solid">週3日以内</td>
+            <td id="q15_a3" style="border-bottom: 0.4mm solid">週4日以上</td>
+            <td style="border-bottom: 0.4mm solid"></td>
+          </tr>
+          <tr>
+            <td class="question_cell">1回の飲酒量は…</td>
+            <td id="q16_a1" style="border-bottom: 0.4mm solid">たしなむ程度</td>
+            <td id="q16_a2" style="border-bottom: 0.4mm solid">少し</td>
+            <td id="q16_a3" style="border-bottom: 0.4mm solid">多め</td>
+            <td id="q16_a4" style="border-bottom: 0.4mm solid">たくさん</td>
+          </tr>
+          <tr>
+            <td class="question_cell">睡眠で休養が十分とれていますか？</td>
+            <td colspan="2" id="q17_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q17_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="3" class="question_cell">
+              運動や食事の生活習慣を改善しようと思いますか？
+            </td>
+            <td colspan="2" id="q18_a1">改善するつもりは無い</td>
+            <td colspan="2" id="q18_a2">改善するつもりである</td>
+          </tr>
+          <tr>
+            <td colspan="4" id="q18_a3">
+              近いうち(1ヶ月程度)に改善するつもりである
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" id="q18_a4" style="border-bottom: 0.4mm solid">
+              すでに改善に取り組んでいる(6ヶ月以内)
+            </td>
+            <td colspan="2" id="q18_a5" style="border-bottom: 0.4mm solid">
+              すでに改善に取り組んでいる(6ヶ月以上)
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              生活習慣改善の保健指導を受講したいですか？
+            </td>
+            <td colspan="2" id="q19_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q19_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="question_cell">
+              ピロリ菌の検査をしましたか？
+            </td>
+            <td id="q20_a1">検査をしていない</td>
+            <td id="q20_a2">陰性(ピロリ菌なし)</td>
+            <td id="q20_a3">陽性→除菌した</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="2" id="q20_a4" style="border-bottom: 0.4mm solid">
+              陽性→除菌失敗/不明
+            </td>
+            <td id="q20_a5" style="border-bottom: 0.4mm solid">陽性→放置</td>
+            <td style="border-bottom: 0.4mm solid"></td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="question_cell">
+              (除菌された方)除菌されたのはいつですか？
+            </td>
+            <td id="q21_a1">今年</td>
+            <td id="q21_a2">昨年</td>
+            <td id="q21_a3">2年前</td>
+            <td id="q21_a4">3年前</td>
+          </tr>
+          <tr>
+            <td id="q21_a5" style="border-bottom: 0.4mm solid">4年前</td>
+            <td id="q21_a6" style="border-bottom: 0.4mm solid">5年以上前</td>
+            <td colspan="2" id="q21_a7" style="border-bottom: 0.4mm solid">
+              検査をしていない
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              女性の方にお聞きします。現在生理中ですか？
+            </td>
+            <td id="q22_a1" style="border-bottom: 0.4mm solid">はい</td>
+            <td id="q22_a2" style="border-bottom: 0.4mm solid">いいえ</td>
+            <td colspan="2" id="q22_a3" style="border-bottom: 0.4mm solid">
+              女性ではありません
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              女性の方にお聞きします。現在妊娠中か、その可能性はありますか？
+            </td>
+            <td id="q23_a1" style="border-bottom: 0.4mm solid">はい</td>
+            <td id="q23_a2" style="border-bottom: 0.4mm solid">いいえ</td>
+            <td colspan="2" id="q23_a3" style="border-bottom: 0.4mm solid">
+              女性ではありません
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              女性の方にお聞きします。現在授乳中ですか？
+            </td>
+            <td id="q24_a1" style="border-bottom: 0.4mm solid">はい</td>
+            <td id="q24_a2" style="border-bottom: 0.4mm solid">いいえ</td>
+            <td colspan="2" id="q24_a3" style="border-bottom: 0.4mm solid">
+              女性ではありません
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              深夜業務に従事していますか？(午後10時から午前5時まで、6ヶ月で24日以内)
+            </td>
+            <td colspan="2" id="q25_a1" style="border-bottom: 0.4mm solid">
+              はい
+            </td>
+            <td colspan="2" id="q25_a2" style="border-bottom: 0.4mm solid">
+              いいえ
+            </td>
+          </tr>
+          <tr>
+            <td class="question_cell">
+              現在通院治療中の疾患(※ここに無い疾患は医師にお伝えください)
+            </td>
+            <td colspan="4" id="q26_a1" style="border-bottom: 0.4mm solid"></td>
+          </tr>
+          <tr>
+            <td class="question_cell">ご自分を健康と思いますか？</td>
+            <td id="q27_a1" style="border-bottom: 0.4mm solid">健康</td>
+            <td id="q27_a2" style="border-bottom: 0.4mm solid">やや健康</td>
+            <td id="q27_a3" style="border-bottom: 0.4mm solid">やや不健康</td>
+            <td id="q27_a4" style="border-bottom: 0.4mm solid">不健康</td>
+          </tr>
+          <tr>
+            <td class="question_cell">同居に介護を必要とする人がいますか？</td>
+            <td id="q28_a1" style="border-bottom: 0.4mm solid">いない</td>
+            <td colspan="2" id="q28_a2" style="border-bottom: 0.4mm solid">
+              いる(主に自分が介護している)
+            </td>
+            <td id="q28_a3" style="border-bottom: 0.4mm solid">
+              いる(主に家族が介護している)
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <table
+          border="1"
+          style="border-collapse: collapse"
+          class="doctor_table same-font-size"
+        >
+          <tr>
+            <td
+              rowspan="2"
+              class="question_cell"
+              style="border-bottom: 0.4mm solid"
+            >
+              自覚症状
+            </td>
+            <td>□特になし</td>
+            <td>□動悸</td>
+            <td>□息切れ</td>
+            <td>□胸痛・胸部圧迫感</td>
+            <td>□悪寒</td>
+          </tr>
+          <tr>
+            <td style="border-bottom: 0.4mm solid">□めまい</td>
+            <td style="border-bottom: 0.4mm solid">□手足の痺れ</td>
+            <td style="border-bottom: 0.4mm solid">□疲れやすい</td>
+            <td style="border-bottom: 0.4mm solid">□喉が渇きやすい</td>
+            <td style="border-bottom: 0.4mm solid">□咳・痰が良く出る</td>
+          </tr>
+          <tr>
+            <td rowspan="9" class="question_cell">所見</td>
+            <td style="border-bottom: 0.4mm solid" colspan="5">
+              □特記なし(内科判定A)
+            </td>
+          </tr>
+          <tr>
+            <td class="shoken_koumoku">不整脈あり→</td>
+            <td>□B経過観察</td>
+            <td colspan="2">□要受診・要精密検査</td>
+            <td>□E治療継続</td>
+          </tr>
+          <tr>
+            <td class="shoken_koumoku">心雑音あり→</td>
+            <td>□B経過観察</td>
+            <td colspan="2">□要受診・要精密検査</td>
+            <td>□E治療継続</td>
+          </tr>
+          <tr>
+            <td class="shoken_koumoku">甲状腺異常あり→</td>
+            <td>□B経過観察</td>
+            <td colspan="2">□要受診・要精密検査</td>
+            <td>□E治療継続</td>
+          </tr>
+          <tr>
+            <td class="shoken_koumoku" style="border-bottom: 0.4mm solid">
+              その他→
+            </td>
+            <td style="border-bottom: 0.4mm solid">□B経過観察</td>
+            <td colspan="2" style="border-bottom: 0.4mm solid">
+              □要受診・要精密検査
+            </td>
+            <td style="border-bottom: 0.4mm solid">□E治療継続</td>
+          </tr>
+          <tr>
+            <td colspan="5">その他の所見名と対応</td>
+          </tr>
+          <tr>
+            <td colspan="5" rowspan="3"></td>
+          </tr>
+          <tr style="height: 7mm"></tr>
+          <tr style="height: 7mm"></tr>
+        </table>
+      </div>
+      <div class="doctor_sign same-font-size">
+        医師サイン欄 ______________________________________________
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  document.getElementById("q1_a2").className = "yes";
+  document.getElementById("q4_a1").className = "yes";
+</script>
+<style>
+  @media print {
+    .container {
+      padding: 0 !important;
+    }
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  .sheet {
+    margin: 0mm;
+    padding: 10mm;
+    position: relative;
+    width: 210mm;
+    height: 294mm;
+  }
+  .sheet-title {
+    /* padding-top: 10mm; */
+    font-size: 2.9mm;
+    margin-top: 3mm;
+    margin-left: 3mm;
+    margin-bottom: -3mm;
+  }
+  .date-style {
+    margin-left: 3mm;
+    font-size: 2.2mm;
+  }
+  .same-font-size {
+    font-size: 2.5mm;
+  }
+  table {
+    border: 0.6mm solid;
+  }
+  .base_data_table {
+    margin-left: 3mm;
+    margin-bottom: 3mm;
+    width: 150mm;
+  }
+  .question_table {
+    margin: 3mm;
+    width: 200mm;
+  }
+  .question_cell {
+    border-right: 0.4mm solid;
+    border-bottom: 0.4mm solid;
+  }
+  .doctor_table {
+    margin: 3mm;
+    width: 200mm;
+  }
+  .shoken_koumoku {
+    text-align: right;
+    border-right: 0.4mm solid;
+    padding-right: 2mm;
+  }
+  .doctor_sign {
+    text-align: right;
+    margin: 3mm;
+    width: 200mm;
+    margin-top: 5mm;
+    font-weight: bold;
+  }
+  .yes {
+    background-color: #89d28e;
+  }
+</style>

@@ -10,7 +10,7 @@ import SwiftUI
 import QuickLook
 
 struct QuickLookView: UIViewControllerRepresentable {
-    let urls:[URL] = [Bundle.main.url(forResource: "template1", withExtension: "html")!,Bundle.main.url(forResource: "Document", withExtension: "pdf")!]
+    let urls:[URL] = [Bundle.main.url(forResource: "template2", withExtension: "html")!,Bundle.main.url(forResource: "Document", withExtension: "pdf")!]
     
     
     func makeUIViewController(context: Context) -> QLPreviewController {

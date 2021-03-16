@@ -14,8 +14,7 @@ struct HandlePDFfiles: View {
     @State var errorText = "error"
     @State private var showSheet = false
     @StateObject private var selectedTool = SelectedTool()
-    @StateObject private var script = Javascript1() 
-    @EnvironmentObject var path:Path
+    @StateObject private var script = Javascript2() 
     
     init(showingView:String,files:[ItemAttribute],index:Int) {
         _showingView = State(initialValue: showingView)
@@ -24,7 +23,7 @@ struct HandlePDFfiles: View {
     }
     
     var body: some View {
-        let fileURLWithPath =  Bundle.main.path(forResource: "template1", ofType: "html")!
+        let fileURLWithPath =  Bundle.main.path(forResource: "template2", ofType: "html")!
         ZStack {
             if showingView == "qrcode"{
                 QRcodeView(showingView:$showingView,errorText:$errorText)

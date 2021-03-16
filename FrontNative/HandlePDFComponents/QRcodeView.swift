@@ -11,7 +11,7 @@ import CodeScanner
 struct QRcodeView: View {
     @Binding var showingView:String
     @Binding var errorText:String
-    @EnvironmentObject var script: Javascript1
+    @EnvironmentObject var script: Javascript2
     @State private var offset: CGFloat = 0
     var body: some View {
         GeometryReader { geometry in
